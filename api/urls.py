@@ -7,6 +7,6 @@ urlpatterns = [
     path("add-correct/<str:username>/", views.add_correct, name="add-correct"),
     path("add-incorrect/<str:username>/", views.add_incorrect, name="add-incorrect"),
     path("change-points/<str:username>/", views.change_points, name="change-points"),
-    path("retrieve-question/", views.retrieve, name="retrieve"),
+    path("retrieve-question/<str:declension>/", views.retrieve, name="retrieve"),
     path("retrieve-others/", views.retrieve_others, name="retrieve-others")
 ]

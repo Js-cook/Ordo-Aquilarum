@@ -7,6 +7,8 @@ from .models import Question, UserExtension
 
 from .serializers import UserExtensionSerializer, QuestionSerializer
 
+import random
+
 # Create your views here.
 @api_view(["GET"])
 def api_overview(request):
@@ -16,7 +18,7 @@ def api_overview(request):
     'Add Correct': '/add-correct/<str:username>/',
     'Add Incorrect': '/add-incorrect/<str:username>/',
     'Change Points': '/change-points/<str:username>/',
-    'Retrieve Question': '/retrieve-question/',
+    'Retrieve Question': '/retrieve-question/<str:declension>/',
     'Retrieve Incorrect': '/retrieve-others/'
   }
   return Response(api_urls)
@@ -48,12 +50,26 @@ def add_incorrect(request, username):
   return Response(serializer.data)
 
 @api_view(["POST"])
-def change_points(request):
+def change_points(request, username, amount):
   pass
 
 @api_view(["GET"])
-def retrieve(request):
-  pass
+def retrieve(request, declension):
+  if declension == "all":
+    questions = Question.objects.all()
+  elif declension == "first":
+    questions = Question.objects.filter(declension="first")
+  elif declension == "second":
+    questions = Question.objects.filter(declension="second")
+  elif declension == "third":
+    questions = Question.objects.filter(declension="third")
+  elif declension == "fourth":
+    questions = Question.objects.filter(declension="fourth")
+  else:
+    questions = Question.objects.filter(declension="fifth")
+  selected_question = random.choice(questions)
+  serializer = QuestionSerializer(selected_question, many=False)
+  return Response(serializer.data)
 
 @api_view(["GET"])
 def retrieve_others(request):
