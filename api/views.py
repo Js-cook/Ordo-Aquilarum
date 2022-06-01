@@ -55,19 +55,11 @@ def change_points(request, username, amount):
 
 @api_view(["GET"])
 def retrieve(request, declension):
-  if declension == "all":
-    questions = Question.objects.all()
-  elif declension == "first":
-    questions = Question.objects.filter(declension="first")
-  elif declension == "second":
-    questions = Question.objects.filter(declension="second")
-  elif declension == "third":
-    questions = Question.objects.filter(declension="third")
-  elif declension == "fourth":
-    questions = Question.objects.filter(declension="fourth")
-  else:
-    questions = Question.objects.filter(declension="fifth")
-  selected_question = random.choice(questions)
+  possibilities = []
+  for question in Question.objects.all():
+    if declension in question.declension:
+      possibilities.append(question)
+  selected_question = random.choice(possibilities)
   serializer = QuestionSerializer(selected_question, many=False)
   return Response(serializer.data)
 
