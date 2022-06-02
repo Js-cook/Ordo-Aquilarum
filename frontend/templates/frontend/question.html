@@ -7,6 +7,33 @@
 <h4 id="user">{{user.username}}</h4>
 <p id="selected-declension">{{declension}}</p>
 <h1 id="question"></h1>
+<p id="case"></p>
+<p id="number"></p>
 <button onclick="retrieveQuestion()">New Question</button>
+<div id="form-wrapper">
+  <form id="form">
+    <label for="nom">Nominative</label>
+    <input type="radio" id="nom" name="case" value="Nominative">
 
+    <label for="gen">Genitive</label>
+    <input type="radio" id="gen" name="case" value="Genitive">
+
+    <label for="dat">Dative</label>
+    <input type="radio" id="dat" name="case" value="Dative">
+
+    <label for="acc">Accusative</label>
+    <input type="radio" id="acc" name="case" value="Accusative">
+
+    <label for="abl">Ablative</label>
+    <input type="radio" id="abl" name="case" value="Ablative">
+    <br>
+    <label for="sg">Singular</label>
+    <input type="radio" id="sg" name="number" value="sg.">
+
+    <label for="pl">Plural</label>
+    <input type="radio" id="pl" name="number" value="pl.">
+
+    <input type="submit" value="Check">
+  </form>
+</div>
 {% endblock %}
