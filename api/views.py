@@ -56,11 +56,18 @@ def change_points(request, username, amount):
 @api_view(["GET"])
 def retrieve(request, declension):
   possibilities = []
+  duplicates = []
   for question in Question.objects.all():
     if declension in question.declension:
       possibilities.append(question)
   selected_question = random.choice(possibilities)
-  serializer = QuestionSerializer(selected_question, many=False)
+  duplicates.append(selected_question)
+  for question in Question.objects.all():
+    if question == selected_question:
+      continue
+    elif question.term in selected_question.term:
+      duplicates.append(question)
+  serializer = QuestionSerializer(duplicates, many=True)
   return Response(serializer.data)
 
 @api_view(["GET"])
