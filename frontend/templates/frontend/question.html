@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Question{% endblock %}
+
+{% block content %}
+<h4 id="user">{{user.username}}</h4>
+<p id="selected-declension">{{declension}}</p>
+<h1 id="question"></h1>
+<button onclick="retrieveQuestion()">New Question</button>
+
+{% endblock %}
