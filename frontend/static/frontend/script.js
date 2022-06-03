@@ -18,10 +18,39 @@ function retrieveQuestion(){
         number_container.innerHTML += list[i].number
       }
       header.innerHTML = list[0].term
-      // header.innerHTML = data.term
-      // case_container.innerHTML = data.case
-      // number_container.innerHTML = data.number
     })
+  }
+}
+
+function changeStats(result){
+  if (result == "correct"){
+    var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-correct/${user}/`
+    fetch(url)
+    retrieveQuestion()
+  }
+  else {
+    var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-incorrect/${user}/`
+    fetch(url)
+    retrieveQuestion()
+  }
+}
+
+function checkAnswer(caseAns, numAns){
+  var ansCorrect = false
+  var caseContainer = document.getElementById("case-answers").innerHTML
+  var possibleCase = caseContainer.split(" ")
+  var numberContainer = document.getElementById("number-answers").innerHTML
+  var possibleNumber = numberContainer.split(" ")
+  for (var i=0; i<possibleCase.length; i++){
+    if (possibleCase[i] == caseAns && possibleNumber[i] == numAns){
+      ansCorrect = true
+    }
+  }
+  if (ansCorrect == true){
+    changeStats("correct")
+  }
+  else{
+    changeStats("incorrect")
   }
 }
 
@@ -30,6 +59,5 @@ formWrapper.addEventListener("submit", function(e){
   e.preventDefault()
   var caseAnswer = document.querySelector("[name='case']:checked").value
   var numberAnswer = document.querySelector("[name='number']:checked").value
-  console.log(caseAnswer)
-  console.log(numberAnswer)
+  checkAnswer(caseAnswer, numberAnswer)
 })

@@ -39,6 +39,7 @@ def all_stats(request):
 def add_correct(request, username):
   user = UserExtension.objects.get(username=username)
   user.correct += 1
+  user.save()
   serializer = UserExtensionSerializer(user, many=False)
   return Response(serializer.data)
 
@@ -46,6 +47,7 @@ def add_correct(request, username):
 def add_incorrect(request, username):
   user = UserExtension.objects.get(username=username)
   user.incorrect += 1
+  user.save()
   serializer = UserExtensionSerializer(user, many=False)
   return Response(serializer.data)
 
