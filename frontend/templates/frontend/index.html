@@ -4,15 +4,15 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div id="all-content">
+<div id="all-content" class="p-3">
   <div id="main-content" class="container">
     <h1>hello world</h1>
   </div>
-  <div class="container d-flex justify-content-center">
-    <div class="row">
+  <div id="cards" class="container d-flex justify-content-center">
+    <div class="row gy-3">
       <div class="col">
         <div class="card rounded" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
+          <img src="{% static 'frontend/all.png' %}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -22,29 +22,7 @@
       </div>
       <div class="col">
         <div class="card rounded" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <div class="card rounded" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card rounded" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
+          <img src="{% static 'frontend/one.png' %}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -53,10 +31,10 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row gy-3">
       <div class="col">
         <div class="card rounded" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
+          <img src="{% static 'frontend/two.png' %}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -66,7 +44,29 @@
       </div>
       <div class="col">
         <div class="card rounded" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
+          <img src="{% static 'frontend/three.png' %}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row gy-3">
+      <div class="col">
+        <div class="card rounded" style="width: 18rem;">
+          <img src="{% static 'frontend/four.png' %}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card rounded" style="width: 18rem;">
+          <img src="{% static 'frontend/five.png' %}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

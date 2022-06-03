@@ -1,4 +1,9 @@
 #all-content {
-  background-color: #e1e5f1 !important;
+  background-color: #f7f6fb !important;
   height: 100%;
+  overflow: scroll;
+}
+
+#cards{
+  width: 100%;
 }
