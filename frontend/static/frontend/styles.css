@@ -1,14 +1,4 @@
-/* #side-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0;
+#all-content {
+  background-color: #e1e5f1 !important;
+  height: 100%;
 }
-
-#link-list {
-  list-style-type: none;
-}
-
-#main-content {
-  padding: 3rem;
-} */
