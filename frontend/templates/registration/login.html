@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+{% if form.errors %}
+<div class="alert alert-danger d-flex justify-content-center" role="alert">
+<h2>Something went wrong. Check that you correctly entered your username and password</h2>
+</div>
+{% endif %}
+
+{% if next %}
+<div class="alert alert-danger d-flex justify-content-center" role="alert">
+<h2>Please login to proceed</h2>
+</div>
+{% endif %}
+
+<div class="d-flex justify-content-center border">
+  <form method="post" action="{% url 'login' %}" class="logform">
+    {% csrf_token %}
+  
+    <h2>Username</h2>
+    <h3>{{form.username}}</h3>
+    <h2>Password</h2>
+    <h3>{{form.password}}</h3>
+
+    <div class="d-grid">
+      <br>
+      <input type="submit" value="Login" class="btn btn-primary logn">
+      <input type="hidden" name="next" value="{{ next }}"
+    </div>
+  </form>
+</div>
+{% endblock %}

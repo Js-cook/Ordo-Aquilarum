@@ -56,6 +56,15 @@
           <a class="nav-link disabled">Disabled</a>
         </li>
       </ul>
+      <ul class="navbar-nav ms-auto">
+        <form class="justify-content-start container-fluid">
+          {% if not user.is_authenticated %}
+          <a class="btn btn-primary" roll="button" href="{% url 'login' %}">Login</a>
+          {% else %}
+          <a class="btn btn-primary" roll="button" href="{% url 'log_out' %}">Logout</a>
+          {% endif %}
+        </form>
+      </ul>
     </div>
   </div>
 </nav>
