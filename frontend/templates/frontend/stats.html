@@ -40,6 +40,9 @@
     pointsPlaceholder.innerHTML = data.points
     rolePlaceholder.innerHTML = data.role
   })
+  .catch(
+    usernamePlaceholder.innerHTML = "Data for the specified user could not be found. Check the information you entered and try again."
+  )
 }
 
 var userSearch = document.getElementById("search-form")
