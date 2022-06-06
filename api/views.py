@@ -60,7 +60,9 @@ def retrieve(request, declension):
   possibilities = []
   duplicates = []
   for question in Question.objects.all():
-    if declension in question.declension:
+    if declension == "all":
+      possibilities.append(question)
+    elif declension in question.declension:
       possibilities.append(question)
   selected_question = random.choice(possibilities)
   duplicates.append(selected_question)
