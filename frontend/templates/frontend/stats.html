@@ -3,7 +3,12 @@
 {% block title %}Stat Lookup{% endblock %}
 
 {% block content %}
-<h1>hello</h1>
+<div class="container">
+  <h1>Stat Search</h1>
+  <p>Using the form below, you can search for a specified user's statistics.</p>
+  <p><b>NOTE: Username must be typed correctly and completely in order locate statistics.</b></p>
+</div>
+<br>
 <div id="search-form" class="d-flex justify-content-center">
   <form class="row">
     <input class="col me-3" type="text" id="username" required placeholder="Username">
@@ -11,7 +16,7 @@
   </form>
 </div>
 <hr>
-<div class="container">
+<div class="container text-center">
   <h1 id="user-placeholder"></h1>
   <h4 id="correct-placeholder"></h4>
   <h4 id="incorrect-placeholder"></h4>
@@ -34,11 +39,11 @@
   fetch(url)
   .then((resp) => resp.json())
   .then(function(data){
-    usernamePlaceholder.innerHTML = data.username
-    correctPlaceholder.innerHTML = data.correct
-    incorrectPlaceholder.innerHTML = data.incorrect
-    pointsPlaceholder.innerHTML = data.points
-    rolePlaceholder.innerHTML = data.role
+    usernamePlaceholder.innerHTML = `Showing data for ${data.username}`
+    correctPlaceholder.innerHTML = `Questions correct: ${data.correct}`
+    incorrectPlaceholder.innerHTML = `Questions incorrect: ${data.incorrect}`
+    pointsPlaceholder.innerHTML = `Points: ${data.points}`
+    rolePlaceholder.innerHTML = `Role: ${data.role}`
   })
   .catch(
     usernamePlaceholder.innerHTML = "Data for the specified user could not be found. Check the information you entered and try again."
