@@ -19,3 +19,6 @@ def question(request, declension):
 def logout_request(request):
   logout(request)
   return redirect("index")
+
+def stats(request):
+  return render(request, "frontend/stats.html")

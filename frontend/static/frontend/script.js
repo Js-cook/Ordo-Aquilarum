@@ -61,3 +61,35 @@ formWrapper.addEventListener("submit", function(e){
   var numberAnswer = document.querySelector("[name='number']:checked").value
   checkAnswer(caseAnswer, numberAnswer)
 })
+
+// function findUser(username){
+//   var usernamePlaceholder = document.getElementById("user-placeholder")
+//   var correctPlaceholder = document.getElementById("correct-placeholder")
+//   var incorrectPlaceholder = document.getElementById("incorrect-placeholder")
+//   var pointsPlaceholder = document.getElementById("points-placeholder")
+//   var rolePlaceholder = document.getElementById("role-placeholder")
+//   usernamePlaceholder.innerHTML = ""
+//   correctPlaceholder.innerHTML = ""
+//   incorrectPlaceholder.innerHTML = ""
+//   pointsPlaceholder.innerHTML = ""
+//   rolePlaceholder.innerHTML = ""
+//   url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-stats/${username}/`
+//   fetch(url)
+//   .then((resp) => resp.json())
+//   .then(function(data){
+//     usernamePlaceholder.innerHTML = data.username
+//     correctPlaceholder.innerHTML = data.correct
+//     incorrectPlaceholder.innerHTML = data.incorrect
+//     pointsPlaceholder.innerHTML = data.points
+//     rolePlaceholder.innerHTML = data.role
+//   })
+// }
+
+// var userSearch = document.getElementById("search-form")
+// userSearch.addEventListener("submit", function(f){
+//   f.preventDefault()
+//   console.log("form submitted")
+//   var username = document.getElementById("username")
+//   findUser(username)
+// })
+    
