@@ -19,6 +19,13 @@ def question(request, declension):
 def logout_request(request):
   logout(request)
   return redirect("index")
-
+  
+@login_required
 def stats(request):
-  return render(request, "frontend/stats.html")
+  user = request.user
+  extension = UserExtension.objects.get(username=user.username)
+  return render(request, "frontend/stats.html", {"usern": extension})
+
+@login_required
+def leaderboard(request):
+  return render(request, "frontend/leader.html")

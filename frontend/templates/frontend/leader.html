@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Leaderboard{% endblock %}
+
+{% block content %}
+<button class="btn btn-primary" onclick="retrieve()">Retrieve Data</button>
+<table id="leader-table" class="table">
+  <thead>
+    <tr>
+      <th scope="col">Position</th>
+      <th scope="col">Username</th>
+      <th scope="col">Points</th>
+    </tr>
+  </thead>
+</table>
+<script>
+  function retrieve(){
+    console.log("button pressed")
+    var table = document.getElementById("leader-table")
+    table.innerHTML = `
+    <thead>
+      <tr>
+        <th scope="col">Position</th>
+        <th scope="col">Username</th>
+        <th scope="col">Points</th>
+      </tr>
+    </thead>
+    `
+    var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-all-stats/`
+    fetch(url)
+    .then((resp) => resp.json())
+    .then(function(data){
+      list = data
+      console.log(list)
+      counter = 1
+      for (var x=0; x<list.length; x++){
+        table.innerHTML += `
+        <tr>
+          <td>${counter}</td>
+          <td>${list[x].username}</td>
+          <td>${list[x].correct}</td>
+        </tr>
+        `
+        counter += 1
+      }
+    })
+  }
+</script>
+{% endblock %}

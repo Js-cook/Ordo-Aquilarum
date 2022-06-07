@@ -3,6 +3,7 @@
 {% block title %}Stat Lookup{% endblock %}
 
 {% block content %}
+<p class="d-none" id="logged-user">{{usern.username}}</p>
 <div class="container mt-3">
   <h1>Stat Search</h1>
   <p>Using the form below, you can search for a specified user's statistics.</p>
@@ -12,6 +13,7 @@
 <div id="search-form" class="d-flex justify-content-center">
   <form class="row">
     <input class="col me-3" type="text" id="username" required placeholder="Username">
+    <button class="col btn btn-primary me-3" id="self" onclick="selfBtn()">Your Stats</button>
     <input class="col btn btn-primary" id="submit" type="submit" value="Search">
   </form>
 </div>
@@ -24,6 +26,11 @@
   <h3 id="role-placeholder"></h3>
 </div>
 <script>
+  function selfBtn(){
+    var input = document.getElementById("username")
+    var username = document.getElementById("logged-user")
+    input.value = username.innerHTML
+  }
   function findUser(username){
   var usernamePlaceholder = document.getElementById("user-placeholder")
   var correctPlaceholder = document.getElementById("correct-placeholder")
