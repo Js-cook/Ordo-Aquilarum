@@ -1,6 +1,10 @@
 var user = document.getElementById("user").innerHTML
+var incorrectBanner = document.getElementById("incorrect-banner")
+var correctBanner = document.getElementById("correct-banner")
 
 function retrieveQuestion(){
+  correctBanner.className="position-absolute bottom-0 start-50 translate-middle-x alert alert-success d-none"
+  incorrectBanner.className="position-absolute bottom-0 start-50 translate-middle-x alert alert-danger d-none"
   var declension = document.getElementById("selected-declension").innerHTML
   if (declension) {
     var header = document.getElementById("question")
@@ -47,9 +51,13 @@ function checkAnswer(caseAns, numAns){
     }
   }
   if (ansCorrect == true){
+    // var incorrectBanner = document.getElementById("incorrect-banner")
+    incorrectBanner.className="position-absolute bottom-0 start-50 translate-middle-x alert alert-danger"
     changeStats("correct")
   }
   else{
+    // var correctBanner = document.getElementById("correct-banner")
+    correctBanner.className="position-absolute bottom-0 start-50 translate-middle-x alert alert-success"
     changeStats("incorrect")
   }
 }

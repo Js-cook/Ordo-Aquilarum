@@ -5,10 +5,14 @@
 
 {% block content %}
 <h4 id="user">{{user.username}}</h4>
-<p id="selected-declension">{{declension}}</p>
-<h1 id="question"></h1>
-<div id="case-answers"></div>
-<div id="number-answers"></div>
+<div class="text-center">
+  <div class="border border-3 d-inline-block p-5 rounded">
+    <p class="d-none" id="selected-declension">{{declension}}</p>
+    <h1 id="question"></h1>
+  </div>
+</div>
+<!-- <div id="case-answers"></div>
+<div id="number-answers"></div> -->
 <button onclick="retrieveQuestion()">New Question</button>
 <div id="form-wrapper">
   <form id="form">
@@ -35,5 +39,13 @@
 
     <input type="submit" value="Check">
   </form>
+</div>
+<div class="position-absolute bottom-0 start-50 translate-middle-x alert alert-danger d-none" id="incorrect-banner">
+  Incorrect! Answers include:
+  <div id="case-answers"></div>
+  <div id="number-answers"></div>
+</div>
+<div class="position-absolute bottom-0 start-50 translate-middle-x alert alert-success d-none" id="correct-banner">
+  Correct! Nicely done.
 </div>
 {% endblock %}
