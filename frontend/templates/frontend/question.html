@@ -13,7 +13,7 @@
 </div>
 <!-- <div id="case-answers"></div>
 <div id="number-answers"></div> -->
-<button onclick="retrieveQuestion()">New Question</button>
+<!-- <button onclick="retrieveQuestion()">New Question</button> -->
 <div id="form-wrapper">
   <form id="form">
     <label for="nom">Nominative</label>
@@ -44,8 +44,10 @@
   Incorrect! Answers include:
   <div id="case-answers"></div>
   <div id="number-answers"></div>
+  <button class="btn btn-danger" onclick="retrieveQuestion()">Continue</button>
 </div>
 <div class="position-absolute bottom-0 start-50 translate-middle-x alert alert-success d-none" id="correct-banner">
   Correct! Nicely done.
+  <button class="btn btn-success" onclick="retrieveQuestion()">Continue</button>
 </div>
 {% endblock %}

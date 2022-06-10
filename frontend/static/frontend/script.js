@@ -26,16 +26,17 @@ function retrieveQuestion(){
   }
 }
 
+// Possibly revert changes later idk
 function changeStats(result){
   if (result == "correct"){
     var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-correct/${user}/`
     fetch(url)
-    retrieveQuestion()
+    // retrieveQuestion()
   }
   else {
     var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-incorrect/${user}/`
     fetch(url)
-    retrieveQuestion()
+    // retrieveQuestion()
   }
 }
 
@@ -52,12 +53,12 @@ function checkAnswer(caseAns, numAns){
   }
   if (ansCorrect == true){
     // var incorrectBanner = document.getElementById("incorrect-banner")
-    incorrectBanner.className="position-absolute bottom-0 start-50 translate-middle-x alert alert-danger"
+    correctBanner.className="position-absolute bottom-0 start-50 translate-middle-x alert alert-success"
     changeStats("correct")
   }
   else{
     // var correctBanner = document.getElementById("correct-banner")
-    correctBanner.className="position-absolute bottom-0 start-50 translate-middle-x alert alert-success"
+    incorrectBanner.className="position-absolute bottom-0 start-50 translate-middle-x alert alert-danger"
     changeStats("incorrect")
   }
 }

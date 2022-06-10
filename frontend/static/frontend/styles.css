@@ -12,7 +12,7 @@
   background-color: #8716b8 !important;
   border: solid #8716b8 !important;
 }
-.btn-primary:hover, .btn:hover {
+.btn-primary:hover {
   background-color: #36084a !important;
   border: solid #36084a !important;
 }
