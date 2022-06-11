@@ -9,5 +9,6 @@ urlpatterns = [
     path("change-points/<str:username>/", views.change_points, name="change-points"),
     path("retrieve-question/<str:declension>/", views.retrieve, name="retrieve"),
     path("retrieve-others/", views.retrieve_others, name="retrieve-others"),
-    path("create-group/<str:name>/", views.new_group, name="create-group")
+    path("create-group/<str:name>/", views.new_group, name="create-group"),
+    path("add-group/<str:gname>/<str:username>/", views.add_to_group, name="add-group")
 ]

@@ -32,3 +32,6 @@ def leaderboard(request):
 
 def teacher(request):
   return render(request, "frontend/teacher.html")
+
+# def add_group(request):
+#   return render(request, "frontend/newgroup.html")

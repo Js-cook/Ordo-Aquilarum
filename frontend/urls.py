@@ -6,5 +6,6 @@ urlpatterns = [
     path("logout", views.logout_request, name="log_out"),
     path("stats", views.stats, name="stats"),
     path("leaderboard", views.leaderboard, name="leaderboard"),
-    path("teacher-portal", views.teacher, name="teacher-portal")
+    path("teacher-portal", views.teacher, name="teacher-portal"),
+    
 ]

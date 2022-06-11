@@ -20,7 +20,9 @@ def api_overview(request):
     'Add Incorrect': '/add-incorrect/<str:username>/',
     'Change Points': '/change-points/<str:username>/',
     'Retrieve Question': '/retrieve-question/<str:declension>/',
-    'Retrieve Incorrect': '/retrieve-others/'
+    'Retrieve Incorrect': '/retrieve-others/',
+    'Add Group': '/create-group/<str:name>/',
+    'Add User to Group': '/add-group/<str:gname>/<str:username>/'
   }
   return Response(api_urls)
 
@@ -82,17 +84,18 @@ def retrieve_others(request):
 
 @api_view(["GET"])
 def new_group(request, name):
-  existing = Group.objects.get(name=name)
-  if len(existing) > 0:
-    return Response("Group name already exists")
-  else:
+  try:
+    existing = Group.objects.get(name=name)
+    return Response(f"{name} already exists")
+  except:
     new_group = Group(name=name)
     new_group.save()
     return Response("Group created successfully")
-
-
+    
 # When you go to list ppl in group you need to find their user extension from the username in the group
 @api_view(["GET"])
 def add_to_group(request, name, group):
   group = Group.objects.get(name=group)
   user = User.objects.get(username=name)
+  user.groups.add(group)
+  return Response(f"{user.username} added to group")

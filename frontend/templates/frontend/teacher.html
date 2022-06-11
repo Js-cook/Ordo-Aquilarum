@@ -3,5 +3,33 @@
 {% block title %}Teacher Portal{% endblock %}
 
 {% block content %}
+<h1 class="container mt-3">Teacher Portal</h1>
+<!-- <a class="btn btn-primary" href="#">Add Class</a> -->
+<div id="form-wrap" class="container">
+  <form>
+    <input id="name-field" type="text" placeholder="Enter class name">
+    <input type="submit" value="Create" class="btn btn-primary">
+  </form>
+</div>
+<div id="result">
+  
+</div>
 
+<script>
+  var result = document.getElementById("result")
+  var wrap = document.getElementById("form-wrap")
+  wrap.addEventListener("submit", function(e){
+    e.preventDefault()
+    result.innerHTML = ""
+    var name = document.getElementById("name-field").value
+    var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/create-group/${name}/`
+    fetch(url)
+    .then((resp) => resp.json())
+    .then(function(data){
+      result.innerHTML = `
+      <p>${data}</p>
+      `
+    })
+  })
+</script>
 {% endblock %}
