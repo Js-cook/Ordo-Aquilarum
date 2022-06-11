@@ -4,8 +4,8 @@
 {% block title %}Question{% endblock %}
 
 {% block content %}
-<h4 id="user">{{user.username}}</h4>
-<div class="text-center">
+<h4 id="user" class="d-none">{{user.username}}</h4>
+<div class="text-center mt-4">
   <div class="border border-3 d-inline-block p-5 rounded">
     <p class="d-none" id="selected-declension">{{declension}}</p>
     <h1 id="question"></h1>
@@ -16,28 +16,43 @@
 <!-- <button onclick="retrieveQuestion()">New Question</button> -->
 <div id="form-wrapper">
   <form id="form">
-    <label for="nom">Nominative</label>
-    <input type="radio" id="nom" name="case" value="Nominative">
-
-    <label for="gen">Genitive</label>
-    <input type="radio" id="gen" name="case" value="Genitive">
-
-    <label for="dat">Dative</label>
-    <input type="radio" id="dat" name="case" value="Dative">
-
-    <label for="acc">Accusative</label>
-    <input type="radio" id="acc" name="case" value="Accusative">
-
-    <label for="abl">Ablative</label>
-    <input type="radio" id="abl" name="case" value="Ablative">
+    <div class="d-flex justify-content-center mt-4">
+      <div class="form-check form-check-inline">
+        <label for="nom">Nominative</label>
+        <input type="radio" id="nom" name="case" value="Nominative">
+      </div>
+      <div class="form-check form-check-inline">
+        <label for="gen">Genitive</label>
+        <input type="radio" id="gen" name="case" value="Genitive">
+      </div>
+      <div class="form-check form-check-inline">
+        <label for="dat">Dative</label>
+        <input type="radio" id="dat" name="case" value="Dative">
+      </div>
+      <div class="form-check form-check-inline">
+        <label for="acc">Accusative</label>
+        <input type="radio" id="acc" name="case" value="Accusative">
+      </div>
+      <div class="form-check form-check-inline">
+        <label for="abl">Ablative</label>
+        <input type="radio" id="abl" name="case" value="Ablative">
+      </div>
+    </div>
     <br>
-    <label for="sg">Singular</label>
-    <input type="radio" id="sg" name="number" value="sg.">
+    <div class="d-flex justify-content-center"> 
+      <div class="form-check form-check-inline">
+        <label for="sg">Singular</label>
+        <input type="radio" id="sg" name="number" value="sg.">
+      </div>
+      <div class="form-check form-check-inline">
+        <label for="pl">Plural</label>
+        <input type="radio" id="pl" name="number" value="pl.">
+      </div>
+    </div>
 
-    <label for="pl">Plural</label>
-    <input type="radio" id="pl" name="number" value="pl.">
-
-    <input type="submit" value="Check" id="submit-btn">
+    <div class="d-flex justify-content-center mt-4">
+      <input type="submit" value="Check" id="submit-btn" class="btn btn-primary">
+    </div>
   </form>
 </div>
 <div class="position-absolute bottom-0 start-50 translate-middle-x alert alert-danger d-none" id="incorrect-banner">

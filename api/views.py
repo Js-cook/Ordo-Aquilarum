@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import Question, UserExtension
+from django.contrib.auth.models import Group, User
 
 from .serializers import UserExtensionSerializer, QuestionSerializer
 
@@ -78,3 +79,20 @@ def retrieve(request, declension):
 @api_view(["GET"])
 def retrieve_others(request):
   pass
+
+@api_view(["GET"])
+def new_group(request, name):
+  existing = Group.objects.get(name=name)
+  if len(existing) > 0:
+    return Response("Group name already exists")
+  else:
+    new_group = Group(name=name)
+    new_group.save()
+    return Response("Group created successfully")
+
+
+# When you go to list ppl in group you need to find their user extension from the username in the group
+@api_view(["GET"])
+def add_to_group(request, name, group):
+  group = Group.objects.get(name=group)
+  user = User.objects.get(username=name)

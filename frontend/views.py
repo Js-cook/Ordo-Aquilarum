@@ -29,3 +29,6 @@ def stats(request):
 @login_required
 def leaderboard(request):
   return render(request, "frontend/leader.html")
+
+def teacher(request):
+  return render(request, "frontend/teacher.html")
