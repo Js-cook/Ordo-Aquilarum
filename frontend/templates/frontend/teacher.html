@@ -17,9 +17,16 @@
 <div id="result" class="container">
   
 </div>
+<hr>
+<div class="container">
+  <h2>Classes</h2>
+  <button class="btn btn-primary" onclick="refreshClasses()">Refresh</button>
+  <ul id="class-list">
+    
+  </ul>
+</div>
 
 <script>
-  
   var result = document.getElementById("result")
   var wrap = document.getElementById("form-wrap")
   wrap.addEventListener("submit", function(e){
@@ -43,6 +50,22 @@
     else {
       wrap.className = "container d-none mt-4"
     }
+  }
+
+  var classList = document.getElementById("class-list")
+  function refreshClasses(){
+    classList.innerHTML = ""
+    url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-all-groups/`
+    fetch(url)
+    .then((resp) => resp.json())
+    .then(function(data){
+      var list = data
+      for (var i=0; i<list.length; i++){
+        classList.innerHTML += `
+        <li><a href="#">${list[i].name}</a></li>
+        `
+      }
+    })
   }
 </script>
 {% endblock %}

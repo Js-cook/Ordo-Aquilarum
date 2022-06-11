@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from .models import Question, UserExtension
 from django.contrib.auth.models import Group, User
 
-from .serializers import UserExtensionSerializer, QuestionSerializer
+from .serializers import UserExtensionSerializer, QuestionSerializer, GroupSerializer
 
 import random
 
@@ -22,7 +22,8 @@ def api_overview(request):
     'Retrieve Question': '/retrieve-question/<str:declension>/',
     'Retrieve Incorrect': '/retrieve-others/',
     'Add Group': '/create-group/<str:name>/',
-    'Add User to Group': '/add-group/<str:gname>/<str:username>/'
+    'Add User to Group': '/add-group/<str:gname>/<str:username>/',
+    'Retrieve All Classes': '/retrieve-all-groups/'
   }
   return Response(api_urls)
 
@@ -99,3 +100,9 @@ def add_to_group(request, name, group):
   user = User.objects.get(username=name)
   user.groups.add(group)
   return Response(f"{user.username} added to group")
+
+@api_view(["GET"])
+def all_groups(request):
+  groups = Group.objects.all()
+  serializer = GroupSerializer(groups, many=True)
+  return Response(serializer.data)
