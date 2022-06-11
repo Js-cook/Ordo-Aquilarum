@@ -3,19 +3,23 @@
 {% block title %}Teacher Portal{% endblock %}
 
 {% block content %}
-<h1 class="container mt-3">Teacher Portal</h1>
-<!-- <a class="btn btn-primary" href="#">Add Class</a> -->
-<div id="form-wrap" class="container">
+<div class="container mt-3">
+  <h1>Teacher Portal</h1>
+  <button class="btn btn-primary" onclick="toggleForm()">Add Class</button>
+</div>
+
+<div id="form-wrap" class="container d-none mt-4">
   <form>
     <input id="name-field" type="text" placeholder="Enter class name">
     <input type="submit" value="Create" class="btn btn-primary">
   </form>
 </div>
-<div id="result">
+<div id="result" class="container">
   
 </div>
 
 <script>
+  
   var result = document.getElementById("result")
   var wrap = document.getElementById("form-wrap")
   wrap.addEventListener("submit", function(e){
@@ -31,5 +35,14 @@
       `
     })
   })
+
+  function toggleForm(){
+    if (wrap.classList.contains("d-none")){
+      wrap.className="container mt-4"
+    }
+    else {
+      wrap.className = "container d-none mt-4"
+    }
+  }
 </script>
 {% endblock %}
