@@ -9,6 +9,12 @@
 </div>
 <br>
 <button class="btn btn-primary" onclick="generateStudents()">Refresh</button>
+<div id="form-w" class="mt-5">
+  <form id="student-selection">
+    
+  <input type="submit" class="btn btn-primary">
+  </form>
+</div>
 <div class="container">
   <ul id="student-list">
     
@@ -16,9 +22,26 @@
 </div>
 
 <script>
+  function populateList(){
+    var container = document.getElementById("student-selection")
+    var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-all-stats/`
+    fetch(url)
+    .then((resp) => resp.json())
+    .then(function(data){
+      var list = data
+      for (var i=0; i<list.length; i++){
+        container.innerHTML += `
+        <label>${list[i].username}</label>
+        <input type="checkbox" id="${list[i].username}" value="${list[i].username}" name="student">
+        `
+      }
+    })
+  }
+  populateList()
+
+  var className = document.getElementById("class-name").innerHTML
   function generateStudents(){
     console.log("button pressed")
-    var className = document.getElementById("class-name").innerHTML
     var studentList = document.getElementById("student-list")
     studentList.innerHTML = ""
     var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-students/${className}/`
@@ -34,5 +57,16 @@
   })
   }
   generateStudents()
+
+  var wrapper = document.getElementById("form-w")
+  wrapper.addEventListener("submit", function(e){
+    e.preventDefault()
+    var selected = document.querySelectorAll("[name='student']:checked")
+    for (var i=0; i<selected.length; i++){
+      var usern = selected[i].value
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-group/${className}/${usern}/`
+      fetch(url)
+    }
+  })
 </script>
 {% endblock %}

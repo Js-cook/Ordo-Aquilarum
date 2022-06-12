@@ -96,9 +96,9 @@ def new_group(request, name):
     
 # When you go to list ppl in group you need to find their user extension from the username in the group
 @api_view(["GET"])
-def add_to_group(request, name, group):
-  group = Group.objects.get(name=group)
-  user = User.objects.get(username=name)
+def add_to_group(request, username, gname):
+  group = Group.objects.get(name=gname)
+  user = User.objects.get(username=username)
   user.groups.add(group)
   return Response(f"{user.username} added to group")
 
