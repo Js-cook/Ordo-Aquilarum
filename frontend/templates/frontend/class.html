@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Class Statistics{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1>Showing Stats for {{class_name}}</h1>
+  <p class="d-none" id="class-name">{{class_name}}</p>
+</div>
+<br>
+<button class="btn btn-primary" onclick="generateStudents()">Refresh</button>
+<div class="container">
+  <ul id="student-list">
+    
+  </ul>
+</div>
+
+<script>
+  function generateStudents(){
+    console.log("button pressed")
+    var className = document.getElementById("class-name").innerHTML
+    var studentList = document.getElementById("student-list")
+    var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-students/${className}/`
+    fetch(url)
+    .then((resp) => resp.json())
+    .then(function(data){
+    var list = data
+    for (var i=0; i<list.length; i++){
+      studentList.innerHTML += `
+      <li>${list[i].username}</li>
+      `
+    }
+  })
+  }
+</script>
+{% endblock %}

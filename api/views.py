@@ -23,7 +23,8 @@ def api_overview(request):
     'Retrieve Incorrect': '/retrieve-others/',
     'Add Group': '/create-group/<str:name>/',
     'Add User to Group': '/add-group/<str:gname>/<str:username>/',
-    'Retrieve All Classes': '/retrieve-all-groups/'
+    'Retrieve All Classes': '/retrieve-all-groups/',
+    'Retrieve Students': '/retrieve-students/<str:name>/'
   }
   return Response(api_urls)
 
@@ -105,4 +106,14 @@ def add_to_group(request, name, group):
 def all_groups(request):
   groups = Group.objects.all()
   serializer = GroupSerializer(groups, many=True)
+  return Response(serializer.data)
+
+@api_view(["GET"])
+def retrieve_students(request, name):
+  students = []
+  for user in User.objects.all():
+    if user.groups.filter(name=name).exists():
+      extension = UserExtension.objects.get(username=user.username)
+      students.append(extension)
+  serializer = UserExtensionSerializer(students, many=True)
   return Response(serializer.data)

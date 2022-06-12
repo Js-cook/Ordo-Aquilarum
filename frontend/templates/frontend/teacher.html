@@ -21,7 +21,7 @@
 <div class="container">
   <h2>Classes</h2>
   <button class="btn btn-primary" onclick="refreshClasses()">Refresh</button>
-  <ul id="class-list">
+  <ul id="class-list" class="mt-4">
     
   </ul>
 </div>
@@ -61,8 +61,12 @@
     .then(function(data){
       var list = data
       for (var i=0; i<list.length; i++){
+        var name = list[i].name
+        // classList.innerHTML += `
+        // <li><a href="{% url 'class-view' name="${name}" %}">${name}</a></li>
+        // `
         classList.innerHTML += `
-        <li><a href="#">${list[i].name}</a></li>
+        <li><a href="https://ordo-aquilarum.p3rplexed.repl.co/classes/${name}/">${name}</a></li>
         `
       }
     })

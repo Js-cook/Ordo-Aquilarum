@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from api.models import UserExtension
+from django.contrib.auth.models import User, Group
 # Create your views here.
 def index(request):
   user = request.user
@@ -33,5 +34,5 @@ def leaderboard(request):
 def teacher(request):
   return render(request, "frontend/teacher.html")
 
-# def add_group(request):
-#   return render(request, "frontend/newgroup.html")
+def class_view(request, name):
+  return render(request, "frontend/class.html", {"class_name":name})
