@@ -6,16 +6,22 @@
 <div class="container mt-4">
   <h1>Showing Stats for {{class_name}}</h1>
   <p class="d-none" id="class-name">{{class_name}}</p>
+  <p>Below you will find the usernames of all users that have been added to the class. To add additional users to the class use the form below.</p>
 </div>
 <br>
-<button class="btn btn-primary" onclick="generateStudents()">Refresh</button>
-<div id="form-w" class="mt-5">
+
+<div class="container">
+  <button class="btn btn-primary" onclick="toggleForm()">Add Students</button>
+</div>
+<div id="form-w" class="mt-5 container d-none">
   <form id="student-selection">
     
-  <input type="submit" class="btn btn-primary">
+  <input type="submit" class="btn btn-primary mb-3" value="Add Selected">
   </form>
 </div>
+<hr>
 <div class="container">
+  <button class="btn btn-primary mb-3" onclick="generateStudents()">Refresh</button>
   <ul id="student-list">
     
   </ul>
@@ -31,8 +37,10 @@
       var list = data
       for (var i=0; i<list.length; i++){
         container.innerHTML += `
-        <label>${list[i].username}</label>
-        <input type="checkbox" id="${list[i].username}" value="${list[i].username}" name="student">
+        <div class="form-check">
+          <label class="form-check-label" for="${list[i].username}">${list[i].username}</label>
+          <input class="form-check-input" type="checkbox" id="${list[i].username}" value="${list[i].username}" name="student">
+        </div>
         `
       }
     })
@@ -67,6 +75,16 @@
       var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-group/${className}/${usern}/`
       fetch(url)
     }
+    generateStudents()
   })
+
+  function toggleForm(){
+    if (wrapper.classList.contains("d-none")){
+      wrapper.className="mt-5 container"
+    }
+    else {
+      wrapper.className="mt-5 container d-none"
+    }
+  }
 </script>
 {% endblock %}
