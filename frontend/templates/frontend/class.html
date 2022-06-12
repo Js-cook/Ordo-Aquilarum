@@ -20,6 +20,7 @@
     console.log("button pressed")
     var className = document.getElementById("class-name").innerHTML
     var studentList = document.getElementById("student-list")
+    studentList.innerHTML = ""
     var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-students/${className}/`
     fetch(url)
     .then((resp) => resp.json())
@@ -32,5 +33,6 @@
     }
   })
   }
+  generateStudents()
 </script>
 {% endblock %}
