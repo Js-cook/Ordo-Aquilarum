@@ -21,3 +21,15 @@ class UserExtension(models.Model):
 
   def __str__(self):
     return(self.username)
+
+class Session(models.Model):
+  username = models.CharField(max_length=100)
+  date = models.DateField(auto_now=True)
+  time_start = models.TimeField()
+  time_end = models.TimeField()
+  correct = models.IntegerField(default=0)
+  incorrect = models.IntegerField(default=0)
+  average = models.FloatField(default=0)
+
+  def __str__(self):
+    return(f"{self.username} - {self.date}")
