@@ -120,7 +120,10 @@ def retrieve_students(request, name):
 
 @api_view(["POST"])
 def create_session(request):
-  serializer = SessionSerializer(request.data)
+  serializer = SessionSerializer(data=request.data)
   if serializer.is_valid():
     serializer.save()
+    print("bueno")
+  else:
+    print("no bueno")
   return Response(serializer.data)

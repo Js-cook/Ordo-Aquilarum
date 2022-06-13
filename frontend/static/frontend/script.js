@@ -6,7 +6,7 @@ var submitBtn = document.getElementById("submit-btn")
 var startHolder = document.getElementById("time-start")
 var correctHolder = document.getElementById("num-correct")
 var incorrectHolder = document.getElementById("num-incorrect")
-var dateHolder = document.getElementById("date").innerHTML
+var dateHolder = document.getElementById("date")
 var correct = 0
 var incorrect = 0
 var today = new Date()
@@ -15,7 +15,7 @@ function retrieveQuestion(){
   correctHolder.innerHTML = correct
   incorrectHolder.innerHTML = incorrect
   startHolder.innerHTML = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  dateHolder = today.getDate()
+  dateHolder.innerHTML = today.getDate()
   submitBtn.disabled = false
   correctBanner.className="position-absolute bottom-0 start-50 translate-middle-x alert alert-success d-none"
   incorrectBanner.className="position-absolute bottom-0 start-50 translate-middle-x alert alert-danger d-none"
@@ -137,7 +137,8 @@ function getCookie(name) {
 const csrftoken = getCookie('csrftoken');
 
 function collectStats(){
-  var endTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var newDate = new Date()
+  var endTime = newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds();
   var avg = correct/(correct+incorrect)
   var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-session/`
   fetch(url,{
@@ -148,14 +149,14 @@ function collectStats(){
     },
     body: JSON.stringify({
       "username": user,
-      "date": dateHolder,
-      "time_start": startHolder,
+      "time_start": startHolder.innerHTML,
       "time_end": endTime,
       "correct": correct,
       "incorrect": incorrect,
       "average": avg
     })
   })
-
-  
+  // "date": dateHolder.innerHTML,
+  // Update when hosted
+  window.location.href = "https://ordo-aquilarum.p3rplexed.repl.co/"
 }
