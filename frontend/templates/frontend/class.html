@@ -22,9 +22,27 @@
 <hr>
 <div class="container">
   <button class="btn btn-primary mb-3" onclick="generateStudents()">Refresh</button>
-  <ul id="student-list">
+  <div id="student-list" class="list-group">
     
-  </ul>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="username" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="username">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul id="modal-content" class="list-group">
+          
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -58,8 +76,10 @@
     .then(function(data){
     var list = data
     for (var i=0; i<list.length; i++){
+      var usern = list[i].username
+      console.log(usern)
       studentList.innerHTML += `
-      <li>${list[i].username}</li>
+      <button class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setModal(${usern})">${usern}</button>
       `
     }
   })
@@ -85,6 +105,30 @@
     else {
       wrapper.className="mt-5 container d-none"
     }
+  }
+
+  function setModal(username){
+    var header = document.getElementById("username")
+    var body = document.getElementById("modal-content")
+    var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-sessions/${username.value}/`
+    body.innerHTML = ""
+    header.innerHTML = username.value
+    fetch(url)
+    .then((resp) => resp.json())
+    .then(function(data){
+      var list = data
+      console.log(list.length)
+      for (var i=0; i<list.length; i++){
+        body.innerHTML += `
+        <li class="list-group-item">
+          <h5>${list[i].date}: ${list[i].time_start} - ${list[i].time_end}</h5>
+          <p>Correct: ${list[i].correct}</p>
+          <p>Incorrect: ${list[i].incorrect}</p>
+          <p>Percentage Correct: ${list[i].average*100}</p>
+        </li>
+        `
+      }
+    })
   }
 </script>
 {% endblock %}

@@ -13,5 +13,6 @@ urlpatterns = [
     path("add-group/<str:gname>/<str:username>/", views.add_to_group, name="add-group"),
     path("retrieve-all-groups/", views.all_groups, name="all-groups"),
     path("retrieve-students/<str:name>/", views.retrieve_students, name="retrieve-students"),
-    path("add-session/", views.create_session, name="create-session")
+    path("add-session/", views.create_session, name="create-session"),
+    path("retrieve-sessions/<str:username>/", views.retrieve_sessions, name="retrieve-sessions")
 ]

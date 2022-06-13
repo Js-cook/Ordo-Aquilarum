@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Question, UserExtension
+from .models import Question, UserExtension, Session
 from django.contrib.auth.models import Group, User
 
 from .serializers import UserExtensionSerializer, QuestionSerializer, GroupSerializer, SessionSerializer
@@ -24,7 +24,9 @@ def api_overview(request):
     'Add Group': '/create-group/<str:name>/',
     'Add User to Group': '/add-group/<str:gname>/<str:username>/',
     'Retrieve All Classes': '/retrieve-all-groups/',
-    'Retrieve Students': '/retrieve-students/<str:name>/'
+    'Retrieve Students': '/retrieve-students/<str:name>/',
+    'New Session': '/add-session/',
+    'Retrieve Sessions': '/sessions/<str:username>/'
   }
   return Response(api_urls)
 
@@ -123,7 +125,14 @@ def create_session(request):
   serializer = SessionSerializer(data=request.data)
   if serializer.is_valid():
     serializer.save()
-    print("bueno")
-  else:
-    print("no bueno")
+  return Response(serializer.data)
+
+@api_view(["GET"])
+def retrieve_sessions(request, username):
+  user_sessions = []
+  all_sessions = Session.objects.all()
+  for session in all_sessions:
+    if username in session.username:
+      user_sessions.append(session)
+  serializer = SessionSerializer(user_sessions, many=True)
   return Response(serializer.data)
