@@ -3,7 +3,19 @@ var incorrectBanner = document.getElementById("incorrect-banner")
 var correctBanner = document.getElementById("correct-banner")
 var submitBtn = document.getElementById("submit-btn")
 
+var startHolder = document.getElementById("time-start")
+var correctHolder = document.getElementById("num-correct")
+var incorrectHolder = document.getElementById("num-incorrect")
+var dateHolder = document.getElementById("date").innerHTML
+var correct = 0
+var incorrect = 0
+var today = new Date()
+
 function retrieveQuestion(){
+  correctHolder.innerHTML = correct
+  incorrectHolder.innerHTML = incorrect
+  startHolder.innerHTML = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  dateHolder = today.getDate()
   submitBtn.disabled = false
   correctBanner.className="position-absolute bottom-0 start-50 translate-middle-x alert alert-success d-none"
   incorrectBanner.className="position-absolute bottom-0 start-50 translate-middle-x alert alert-danger d-none"
@@ -31,11 +43,13 @@ function retrieveQuestion(){
 // Possibly revert changes later idk
 function changeStats(result){
   if (result == "correct"){
+    correct += 1
     var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-correct/${user}/`
     fetch(url)
     // retrieveQuestion()
   }
   else {
+    incorrect += 1
     var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-incorrect/${user}/`
     fetch(url)
     // retrieveQuestion()
@@ -105,4 +119,43 @@ formWrapper.addEventListener("submit", function(e){
 //   var username = document.getElementById("username")
 //   findUser(username)
 // })
-    
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+function collectStats(){
+  var endTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var avg = correct/(correct+incorrect)
+  var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-session/`
+  fetch(url,{
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+      "X-CSRFToken": csrftoken,
+    },
+    body: JSON.stringify({
+      "username": user,
+      "date": dateHolder,
+      "time_start": startHolder,
+      "time_end": endTime,
+      "correct": correct,
+      "incorrect": incorrect,
+      "average": avg
+    })
+  })
+
+  
+}

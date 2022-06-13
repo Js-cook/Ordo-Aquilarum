@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from .models import Question, UserExtension
 from django.contrib.auth.models import Group, User
 
-from .serializers import UserExtensionSerializer, QuestionSerializer, GroupSerializer
+from .serializers import UserExtensionSerializer, QuestionSerializer, GroupSerializer, SessionSerializer
 
 import random
 
@@ -116,4 +116,11 @@ def retrieve_students(request, name):
       extension = UserExtension.objects.get(username=user.username)
       students.append(extension)
   serializer = UserExtensionSerializer(students, many=True)
+  return Response(serializer.data)
+
+@api_view(["POST"])
+def create_session(request):
+  serializer = SessionSerializer(request.data)
+  if serializer.is_valid():
+    serializer.save()
   return Response(serializer.data)

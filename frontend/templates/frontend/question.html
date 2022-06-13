@@ -4,6 +4,9 @@
 {% block title %}Question{% endblock %}
 
 {% block content %}
+<div class="float-end">
+  <button onclick="collectStats()">X</button>
+</div>
 <h4 id="user" class="d-none">{{user.username}}</h4>
 <div class="text-center mt-4">
   <div class="border border-3 d-inline-block p-5 rounded">
@@ -65,4 +68,11 @@
   Correct! Nicely done.
   <button class="btn btn-success" onclick="retrieveQuestion()">Continue</button>
 </div>
+<div id="stats-block" class="d-none">
+  <p id="date"></p>
+  <p id="num-correct"></p>
+  <p id="num-incorrect"></p>
+  <p id="time-start"></p>
+</div>
+
 {% endblock %}
