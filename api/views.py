@@ -7,6 +7,7 @@ from .models import Question, UserExtension, Session
 from django.contrib.auth.models import Group, User
 
 from .serializers import UserExtensionSerializer, QuestionSerializer, GroupSerializer, SessionSerializer
+from .adj_gen import generate_adj
 
 import random
 
@@ -84,7 +85,9 @@ def retrieve(request, declension):
 
 @api_view(["GET"])
 def retrieve_others(request):
-  pass
+  func = generate_adj()
+  serializer = QuestionSerializer(func, many=True)
+  return Reponse(serializer.data)
 
 @api_view(["GET"])
 def new_group(request, name):
