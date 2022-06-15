@@ -5,22 +5,25 @@ def generate_adj(declension):
   items = []
   final = []
 
-  for question in Question.objects.all():
-    if declension == "all":
-      items.append(question)
-    elif declension in question.declension:
-      items.append(question)
+  if declension == "all":
+    # for question in Question.objects.all():
+      # items.append(question)
+    query = Question.objects.all()
+    items = list(query.values())
+  else:
+    query = Question.objects.filter(declension=f" {declension} ")
+    items = list(query.values())
 
   selection = random.choice(items)
   
   # filtering items
   items.remove(selection)
   for r_item in items:
-    selected_split = selection.term.split(" ")
-    r_split = r_item.term.split(" ")
+    selected_split = selection['term'].split(" ")
+    r_split = r_item['term'].split(" ")
     
     # If the terms are the same
-    if r_item.term == selection.term:
+    if r_item['term'] == selection['term']:
       items.remove(r_item)
     
     # If the first of term is the same (prevents dupes with different adj)  

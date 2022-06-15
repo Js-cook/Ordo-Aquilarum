@@ -8,6 +8,9 @@ class Question(models.Model):
   gender = models.CharField(max_length=5)
   declension = models.CharField(max_length=15)
 
+  class Meta:
+    indexes = [models.Index(fields=["declension"])]
+
   def __str__(self):
     return(self.term)
 

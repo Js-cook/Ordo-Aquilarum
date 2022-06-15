@@ -17,9 +17,7 @@ var formWrapper = document.getElementById("form-wrapper")
 var adjFormWrapper = document.getElementById("second-form-wrapper")
 
 function retrieveQuestion(){
-  // var qType = Math.floor(Math.random() * 2)
-  var qType = 1
-  
+  var qType = Math.floor(Math.random() * 2)
   correctHolder.innerHTML = correct
   incorrectHolder.innerHTML = incorrect
   startHolder.innerHTML = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
