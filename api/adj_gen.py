@@ -1,12 +1,16 @@
 import random
 from api.models import Question
 
-def generate_adj():
+def generate_adj(declension):
   items = []
   final = []
-  
+
   for question in Question.objects.all():
-    items.append(question)
+    if declension == "all":
+      items.append(question)
+    elif declension in question.declension:
+      items.append(question)
+
   selection = random.choice(items)
   
   # filtering items

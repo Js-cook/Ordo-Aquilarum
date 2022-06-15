@@ -84,10 +84,10 @@ def retrieve(request, declension):
   return Response(serializer.data)
 
 @api_view(["GET"])
-def retrieve_others(request):
-  func = generate_adj()
+def retrieve_others(request, declension):
+  func = generate_adj(declension)
   serializer = QuestionSerializer(func, many=True)
-  return Reponse(serializer.data)
+  return Response(serializer.data)
 
 @api_view(["GET"])
 def new_group(request, name):

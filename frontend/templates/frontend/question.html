@@ -8,16 +8,23 @@
   <button onclick="collectStats()">X</button>
 </div>
 <h4 id="user" class="d-none">{{user.username}}</h4>
-<div class="text-center mt-4">
+<!-- Container for case/number -->
+<div class="text-center mt-4 d-none" id="case-num">
   <div class="border border-3 d-inline-block p-5 rounded">
     <p class="d-none" id="selected-declension">{{declension}}</p>
     <h1 id="question"></h1>
   </div>
 </div>
-<!-- <div id="case-answers"></div>
-<div id="number-answers"></div> -->
-<!-- <button onclick="retrieveQuestion()">New Question</button> -->
-<div id="form-wrapper">
+
+<!-- Container for adjective question -->
+<div class="text-center mt-4 d-none" id="adj">
+  <div class="border border-3 d-inline-block p-5 rounded">
+    <h1 id="adj-question"></h1>
+  </div>
+</div>
+
+<!-- First form wrapper -->
+<div id="form-wrapper" class="d-none">
   <form id="form">
     <div class="d-flex justify-content-center mt-4">
       <div class="form-check form-check-inline">
@@ -58,10 +65,22 @@
     </div>
   </form>
 </div>
+
+<!-- Form for adj question -->
+<div id="second-form-wrapper" class="d-none">
+  <form id="form" class="d-flex justify-content-center mt-4">
+    <div class="align-items-center">
+      <input type="button" class="btn btn-primary" id="option1">
+      <input type="button" class="btn btn-primary" id="option2">
+      <input type="button" class="btn btn-primary" id="option3">
+    </div>
+  </form>
+</div>
 <div class="position-absolute bottom-0 start-50 translate-middle-x alert alert-danger d-none" id="incorrect-banner">
   Incorrect! Answers include:
   <div id="case-answers"></div>
   <div id="number-answers"></div>
+  <div id="adj-answer"></div>
   <button class="btn btn-danger" onclick="retrieveQuestion()">Continue</button>
 </div>
 <div class="position-absolute bottom-0 start-50 translate-middle-x alert alert-success d-none" id="correct-banner">
