@@ -21,6 +21,8 @@ class UserExtension(models.Model):
   incorrect = models.IntegerField(default=0)
   points = models.IntegerField(default=0)
   role = models.CharField(max_length=100)
+  points_multiplier = models.IntegerField(default=1)
+  points_insurance = models.IntegerField(default=1)
 
   def __str__(self):
     return(self.username)

@@ -15,6 +15,8 @@ var caseHeader = document.getElementById("case-num")
 var adjHeader = document.getElementById("adj")
 var formWrapper = document.getElementById("form-wrapper")
 var adjFormWrapper = document.getElementById("second-form-wrapper")
+var pointsMultiplier = document.getElementById("point-mult").innerHTML
+var pointsInsurance = document.getElementById("point-insur").innerHTML
 
 function retrieveQuestion(){
   var qType = Math.floor(Math.random() * 2)
@@ -99,14 +101,19 @@ function retrieveQuestion(){
 function changeStats(result){
   if (result == "correct"){
     correct += 1
+    var added = 5 * pointsMultiplier
     var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-correct/${user}/`
     fetch(url)
+    var secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-points/${user}/${added}/`
     // retrieveQuestion()
   }
   else {
     incorrect += 1
+    var subtracted = Math.ceil(15 / pointsInsurance)
     var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-incorrect/${user}/`
     fetch(url)
+    var secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-points/${user}/${-subtracted}/`
+    fetch(secondUrl)
     // retrieveQuestion()
   }
 }

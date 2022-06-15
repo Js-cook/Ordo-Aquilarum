@@ -15,7 +15,8 @@ def index(request):
 @login_required
 def question(request, declension):
   user = request.user
-  return render(request, "frontend/question.html", {"user": user, "declension": declension})
+  extension = UserExtension.objects.get(username=user.username)
+  return render(request, "frontend/question.html", {"user": user, "declension": declension, "usere": extension})
 
 def logout_request(request):
   logout(request)

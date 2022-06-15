@@ -60,9 +60,12 @@ def add_incorrect(request, username):
   serializer = UserExtensionSerializer(user, many=False)
   return Response(serializer.data)
 
-@api_view(["POST"])
+@api_view(["GET"])
 def change_points(request, username, amount):
-  pass
+  user = UserExtension.objects.get(username=username)
+  user.points += amount
+  user.save()
+  return Response("Point values updated")
 
 @api_view(["GET"])
 def retrieve(request, declension):
