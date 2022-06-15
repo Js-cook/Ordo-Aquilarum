@@ -49,4 +49,5 @@ def class_view(request, name):
     return redirect("index")
 @login_required
 def shop(request):
-  return render(request, "frontend/shop.html")
+  user = UserExtension.objects.get(username=request.user.username)
+  return render(request, "frontend/shop.html", {"user": user})

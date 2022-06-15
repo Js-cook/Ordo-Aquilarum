@@ -3,7 +3,58 @@
 {% block title %}Shop{% endblock %}
 
 {% block content %}
-<div class="container">
-  <h1></h1>
+<nav class="navbar bg-light">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">Account Balance: {{user.points}} points</span>
+  </div>
+</nav>
+<div class="container mt-3">
+  <h1>Shop</h1>
+  <p>Welcome to the shop! I have numerous wares that can be yours...for a price of course. NOTE: Roles are currently one time use! (meaning if you buy a new role, it will replace your old role and you will have to buy your old role again so choose wisely!)</p>
+</div>
+<hr>
+<div class="container mt-4">
+  <h2>Point Multipliers</h2>
+  <p>Want more 'bang for your buck' after correctly answering a question? A point multiplier may be of some assistance. Point multipliers are automatically applied upon purchase.</p>
+  <div class="d-flex justify-content-center">
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="container mt-4">
+  <h2>Insurance</h2>
+  <p>On the wrong type of answer streak? Some insurance might soften the point blow from an incorrect answer. Insurance is automatically applied upon purchase.</p>
+  <div class="d-flex justify-content-center">
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="container mt-4">
+  <h2>Roles</h2>
+  <p>Want to make your profile stand out? A special role might spice up your profile and show others your skills. </p>
+  <div class="d-flex justify-content-center">
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
