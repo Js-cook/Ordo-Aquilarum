@@ -105,6 +105,7 @@ function changeStats(result){
     var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-correct/${user}/`
     fetch(url)
     var secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-points/${user}/${added}/`
+    fetch(secondUrl)
     // retrieveQuestion()
   }
   else {

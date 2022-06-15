@@ -32,8 +32,21 @@ def stats(request):
 def leaderboard(request):
   return render(request, "frontend/leader.html")
 
+@login_required
 def teacher(request):
-  return render(request, "frontend/teacher.html")
+  user = UserExtension.objects.get(username=request.user.username)
+  if user.is_teacher:
+    return render(request, "frontend/teacher.html")
+  else:
+    return redirect("index")
 
+@login_required
 def class_view(request, name):
-  return render(request, "frontend/class.html", {"class_name":name})
+  user = UserExtension.objects.get(username=request.user.username)
+  if user.is_teacher:
+    return render(request, "frontend/class.html", {"class_name":name})
+  else:
+    return redirect("index")
+@login_required
+def shop(request):
+  return render(request, "frontend/shop.html")
