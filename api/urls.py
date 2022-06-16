@@ -7,6 +7,7 @@ urlpatterns = [
     path("add-correct/<str:username>/", views.add_correct, name="add-correct"),
     path("add-incorrect/<str:username>/", views.add_incorrect, name="add-incorrect"),
     path("change-points/<str:username>/<int:amount>/", views.change_points, name="change-points"),
+    path("subtract-points/<str:username>/<int:amount>/", views.subtract_points, name="subtract-points"),
     path("retrieve-question/<str:declension>/", views.retrieve, name="retrieve"),
     path("retrieve-others/<str:declension>/", views.retrieve_others, name="retrieve-others"),
     path("create-group/<str:name>/", views.new_group, name="create-group"),

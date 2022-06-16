@@ -7,6 +7,8 @@
 <nav class="navbar bg-light">
   <div class="container-fluid">
     <span class="navbar-brand mb-0 h1">Account Balance: {{user.points}} points</span>
+    <p class="d-none" id="user-points">{{user.points}}</p>
+    <p class="d-none" id="user-insurance">{{user.points_insurance}}</p>
   </div>
 </nav>
 <div class="container mt-3">
@@ -38,9 +40,9 @@
     <div class="card" style="width: 18rem;">
       <img src="..." class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title" id="insurance-header"></h5>
+        <p class="card-text" id="insurance-body"></p>
+        <button id="insurance-btn" class="btn btn-primary">Purchase plan</button>
       </div>
     </div>
   </div>
@@ -54,19 +56,26 @@
     <div class="card" style="width: 18rem;">
       <img src="..." class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
+        <h5 class="card-title"></h5>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
   </div>
 </div>
+<div class="position-absolute   alert alert-danger d-none sticky-bottom d-none" id="status-bar"><p>Insufficient funds!</p></div>
+
 <script type="text/javascript">
   var user = document.getElementById("username").innerHTML
   var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-stats/${user}/`
   var multContainer = document.getElementById("current-mult")
   var insurContainer = document.getElementById("current-insur")
   var roleContainer = document.getElementById("current-role")
+  var insuranceHeader = document.getElementById("insurance-header")
+  var insuranceBody = document.getElementById("insurance-body")
+  var insuranceBtn = document.getElementById("insurance-btn")
+  var points = document.getElementById("user-points").innerHTML
+  var statusBar = document.getElementById("status-bar")
   fetch(url)
   .then((resp) => resp.json())
   .then(function(data){
@@ -77,22 +86,85 @@
       insurContainer.innerHTML += " Uninsured"
     }
     else {
-      insurContainer.innerHTML += ` 1/${data.points_insurance} reduction in point deduction`
+      insurContainer.innerHTML += `${data.points_insurance}x reduction in point deduction`
     }
+    insuranceCard(document.getElementById("user-insurance").innerHTML, data)
   })
 
-  function insuranceCard(insurance){
+  function insuranceCard(insurance, data){
     if (insurance == 1){
       // fill for 3
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-insurance/${data.username}/${3}/`
+      insuranceHeader.innerHTML = "Basic Insurance Coverage"
+      insuranceBody.innerHTML = "It's not much, but it's something. This plan will reduce point loss by 3x and costs <b>150</b> points."
+      insuranceBtn.onclick = function(){
+        if (data.points >= 150){
+          // var num = -150
+          // https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/cookjaco/10/
+          var secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/150/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
     }
     else if (insurance == 3){
       // fill for 10
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-insurance/${data.username}/${5}/`
+      insuranceHeader.innerHTML = "Intermediate Insurance Coverage"
+      insuranceBody.innerHTML = "Now you're moving up! This plan provides slightly more coverage than the first plan (but not much...). This plan will reduce point loss by 5x and costs <b>500</b> points."
+      insuranceBtn.onclick = function(){
+        if (data.points >= 500){
+          var secondUrl = `https:/ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/${500}/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
     }
     else if (insurance == 10){
       // fill for 15
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-insurance/${data.username}/${10}/`
+      insuranceHeader.innerHTML = "Advanced Insurance Coverage"
+      insuranceBody.innerHTML = "Now this is insurance coverage! This plan provides even more coverage than the previous two plans. This plan will reduce point loss by 10x and costs <b>1000</b> points."
+      insuranceBtn.onclick = function(){
+        if (data.points >= 1000){
+          var secondUrl = `https:/ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/${1000}/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
+    }
+    else if (insurance == 15) {
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-insurance/${data.username}/${15}/`
+      insuranceHeader.innerHTML = "Supreme Insurance Coverage"
+      insuranceBody.innerHTML = "This is more like a coverup than insurance at this point. This plan provides maximum protection from point loss, and will reduce point loss by 15x (meaning a wrong answer will only set you back <i>1</i> point). This plan costs <b>3000</b> points"
+      insuranceBtn.onclick = function(){
+        if (data.points >= 3000){
+          var secondUrl = `https:/ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/${3000}/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
     }
     else {
-      // disable button and change text
+      insuranceHeader.innerHTML = "Max Coverage Achieved"
+      insuranceBody.innerHTML = "Sorry but there are no further insurance policies available at this time, check again soon."
+      insuranceBtn.disabled = true
     }
   }
   function multiplierCard(multiplier){

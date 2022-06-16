@@ -113,7 +113,7 @@ function changeStats(result){
     var subtracted = Math.ceil(15 / pointsInsurance)
     var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-incorrect/${user}/`
     fetch(url)
-    var secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-points/${user}/${-subtracted}/`
+    var secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${user}/${subtracted}/`
     fetch(secondUrl)
     // retrieveQuestion()
   }

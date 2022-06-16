@@ -71,6 +71,13 @@ def change_points(request, username, amount):
   return Response("Point values updated")
 
 @api_view(["GET"])
+def subtract_points(request, username, amount):
+  user = UserExtension.objects.get(username=username)
+  user.points -= amount
+  user.save()
+  return Response("Point values updated")
+
+@api_view(["GET"])
 def retrieve(request, declension):
   possibilities = []
   duplicates = []
