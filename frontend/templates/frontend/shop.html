@@ -3,6 +3,7 @@
 {% block title %}Shop{% endblock %}
 
 {% block content %}
+<p class="d-none" id="username">{{user.username}}</p>
 <nav class="navbar bg-light">
   <div class="container-fluid">
     <span class="navbar-brand mb-0 h1">Account Balance: {{user.points}} points</span>
@@ -16,6 +17,7 @@
 <div class="container mt-4">
   <h2>Point Multipliers</h2>
   <p>Want more 'bang for your buck' after correctly answering a question? A point multiplier may be of some assistance. Point multipliers are automatically applied upon purchase.</p>
+  <p id="current-mult">Current Multiplier:</p>
   <div class="d-flex justify-content-center">
     <div class="card" style="width: 18rem;">
       <img src="..." class="card-img-top" alt="...">
@@ -31,6 +33,7 @@
 <div class="container mt-4">
   <h2>Insurance</h2>
   <p>On the wrong type of answer streak? Some insurance might soften the point blow from an incorrect answer. Insurance is automatically applied upon purchase.</p>
+  <p id="current-insur">Current coverage:</p>
   <div class="d-flex justify-content-center">
     <div class="card" style="width: 18rem;">
       <img src="..." class="card-img-top" alt="...">
@@ -46,6 +49,7 @@
 <div class="container mt-4">
   <h2>Roles</h2>
   <p>Want to make your profile stand out? A special role might spice up your profile and show others your skills. </p>
+  <p id="current-role">Current Role:</p>
   <div class="d-flex justify-content-center">
     <div class="card" style="width: 18rem;">
       <img src="..." class="card-img-top" alt="...">
@@ -57,4 +61,45 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  var user = document.getElementById("username").innerHTML
+  var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-stats/${user}/`
+  var multContainer = document.getElementById("current-mult")
+  var insurContainer = document.getElementById("current-insur")
+  var roleContainer = document.getElementById("current-role")
+  fetch(url)
+  .then((resp) => resp.json())
+  .then(function(data){
+    multContainer.innerHTML += ` ${data.points_multiplier}x`
+    // insurContainer.innerHTML += data.points_insurance
+    roleContainer.innerHTML += ` ${data.role}`
+    if (data.points_insurance == 1){
+      insurContainer.innerHTML += " Uninsured"
+    }
+    else {
+      insurContainer.innerHTML += ` 1/${data.points_insurance} reduction in point deduction`
+    }
+  })
+
+  function insuranceCard(insurance){
+    if (insurance == 1){
+      // fill for 3
+    }
+    else if (insurance == 3){
+      // fill for 10
+    }
+    else if (insurance == 10){
+      // fill for 15
+    }
+    else {
+      // disable button and change text
+    }
+  }
+  function multiplierCard(multiplier){
+    
+  }
+  function roleCard(role){
+    
+  }
+</script>
 {% endblock %}

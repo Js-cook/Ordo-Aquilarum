@@ -14,5 +14,8 @@ urlpatterns = [
     path("retrieve-all-groups/", views.all_groups, name="all-groups"),
     path("retrieve-students/<str:name>/", views.retrieve_students, name="retrieve-students"),
     path("add-session/", views.create_session, name="create-session"),
-    path("retrieve-sessions/<str:username>/", views.retrieve_sessions, name="retrieve-sessions")
+    path("retrieve-sessions/<str:username>/", views.retrieve_sessions, name="retrieve-sessions"),
+    path("add-multiplier/<str:username>/<int:amount>/", views.add_multiplier, name="add-multiplier"),
+    path("add-insurance/<str:username>/<int:amount>/", views.add_insurance, name="add-insurance"),
+    path("change-role/<str:username>/<str:role>/", views.change_role, name="change-role")
 ]

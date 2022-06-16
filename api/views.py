@@ -27,7 +27,10 @@ def api_overview(request):
     'Retrieve All Classes': '/retrieve-all-groups/',
     'Retrieve Students': '/retrieve-students/<str:name>/',
     'New Session': '/add-session/',
-    'Retrieve Sessions': '/sessions/<str:username>/'
+    'Retrieve Sessions': '/sessions/<str:username>/',
+    'Add Insurance': '/add-insurance/<str:username>/<int:amount>/',
+    'Add Multiplier': '/add-multiplier/<str:username>/<int:amount>/',
+    'Change Role': '/change-role/<str:username>/<str:role>/'
   }
   return Response(api_urls)
 
@@ -142,3 +145,24 @@ def retrieve_sessions(request, username):
       user_sessions.append(session)
   serializer = SessionSerializer(user_sessions, many=True)
   return Response(serializer.data)
+
+@api_view(["GET"])
+def add_multiplier(request, username, amount):
+  extension = UserExtension.objects.get(username=username)
+  extension.points_multiplier = amount
+  extension.save()
+  return Response(f"Multiplier updated to {amount}x")
+
+@api_view(["GET"])
+def add_insurance(request, username, amount):
+  extension = UserExtension.objects.get(username=username)
+  extension.points_insurance = amount
+  extension.save()
+  return Response(f"Insurance now reduces losses by {amount}x")
+
+@api_view(["GET"])
+def change_role(request, username, role):
+  extension = UserExtension.objects.get(username=username)
+  extension.role = role
+  extension.save()
+  return Response(f"Role updated to {role}")
