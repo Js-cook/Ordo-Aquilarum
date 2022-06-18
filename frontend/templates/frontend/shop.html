@@ -3,7 +3,7 @@
 {% block title %}Shop{% endblock %}
 
 {% block content %}
-
+<!-- To crack the password, one must give a proper programmer welcome. -->
 <p class="d-none" id="username">{{user.username}}</p>
 <nav class="navbar bg-light">
   <div class="container-fluid">
@@ -16,7 +16,13 @@
 </nav>
 <div class="container mt-3">
   <h1>Shop</h1>
-  <p>Welcome to the shop! I have numerous wares that can be yours...for a price of course. NOTE: Roles are currently one time use! (meaning if you buy a new role, it will replace your old role and you will have to buy your old role again so choose wisely!)</p>
+  <p>Welcome to the shop! I have numerous wares that can be yours...for a price of course.</p>
+  <div class="d-none" id="form-wrapper">
+    <form>
+      <input type="text" placeholder="Enter the password" id="password-enter">
+      <input type="submit" class="btn btn-primary" value="Enter">
+    </form>
+  </div>
 </div>
 <hr>
 <div class="container mt-4">
@@ -90,6 +96,16 @@
       </div>
     </div>
   </div>
+  <div id="cryptologist-card" class="d-flex justify-content-center d-none">
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Cryptologist</h5>
+        <p class="card-text">You seemed to have cracked the code... As a reward, I present you with a special title.</p>
+        <button id="cryptologist-btn" class="btn btn-primary">Acquire Title</button>
+      </div>
+    </div>
+  </div>
 </div>
 <div>
   <h3 id="log"> > </h3>
@@ -114,6 +130,20 @@
   var roleBtn = document.getElementById("role-btn")
   // var goldenTitles = ["DEV", "Omniscient", "Hacker", "Cryptologist"]
   var goldenTitles = {DEV: "DEV", Omniscient: "Omniscient", Hacker: "Hacker", Cryptologist: "Cryptologist"}
+
+  var wrapper = document.getElementById("form-wrapper")
+  wrapper.addEventListener("submit", function(e){
+    e.preventDefault()
+    if (document.getElementById("password-enter").value == "hello world"){
+      document.getElementById("cryptologist-card").className = "d-flex justify-content-center"
+      document.getElementById("cryptologist-btn").onclick = function(){
+        var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-role/${user}/Cryptologist/`
+        fetch(url)
+        window.location.href = window.location.href
+      }
+    }
+  })
+  
   var log = document.getElementById("log")
 
   document.addEventListener("keydown", function(e){
@@ -145,6 +175,7 @@
   function toggleSecret(){
     var card = document.getElementById("omniscient-card")
     var omniscientBtn = document.getElementById("omniscient-btn")
+    document.getElementById("form-wrapper").className = ""
     if (card.className == "d-flex justify-content-center d-none"){
       card.className = "d-flex justify-content-center"
       omniscientBtn.onclick = function(){
