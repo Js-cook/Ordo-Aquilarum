@@ -20,7 +20,7 @@ class UserExtension(models.Model):
   correct = models.IntegerField(default=0)
   incorrect = models.IntegerField(default=0)
   points = models.IntegerField(default=0)
-  role = models.CharField(max_length=100)
+  role = models.CharField(max_length=100, default="None")
   points_multiplier = models.IntegerField(default=1)
   points_insurance = models.IntegerField(default=1)
 

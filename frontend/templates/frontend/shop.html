@@ -9,6 +9,8 @@
     <span class="navbar-brand mb-0 h1">Account Balance: {{user.points}} points</span>
     <p class="d-none" id="user-points">{{user.points}}</p>
     <p class="d-none" id="user-insurance">{{user.points_insurance}}</p>
+    <p class="d-none" id="user-multiplier">{{user.points_multiplier}}</p>
+    <p class="d-none" id="user-role">{{user.role}}</p>
   </div>
 </nav>
 <div class="container mt-3">
@@ -24,9 +26,9 @@
     <div class="card" style="width: 18rem;">
       <img src="..." class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title" id="multiplier-header"></h5>
+        <p class="card-text" id="multiplier-body"></p>
+        <button class="btn btn-primary" id="multiplier-btn">Upgrade</button>
       </div>
     </div>
   </div>
@@ -56,9 +58,9 @@
     <div class="card" style="width: 18rem;">
       <img src="..." class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title"></h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title" id="role-header"></h5>
+        <p class="card-text" id="role-body"></p>
+        <button class="btn btn-primary" id="role-btn">Purchase Title</button>
       </div>
     </div>
   </div>
@@ -74,8 +76,16 @@
   var insuranceHeader = document.getElementById("insurance-header")
   var insuranceBody = document.getElementById("insurance-body")
   var insuranceBtn = document.getElementById("insurance-btn")
+  var multiplierBtn = document.getElementById("multiplier-btn")
   var points = document.getElementById("user-points").innerHTML
   var statusBar = document.getElementById("status-bar")
+  var multiplierHeader = document.getElementById("multiplier-header")
+  var multiplierBody = document.getElementById("multiplier-body")
+  var roleHeader = document.getElementById("role-header")
+  var roleBody = document.getElementById("role-body")
+  var roleBtn = document.getElementById("role-btn")
+  // var goldenTitles = ["DEV", "Omniscient", "Hacker", "Cryptologist"]
+  var goldenTitles = {DEV: "DEV", Omniscient: "Omniscient", Hacker: "Hacker", Cryptologist: "Cryptologist"}
   fetch(url)
   .then((resp) => resp.json())
   .then(function(data){
@@ -89,8 +99,99 @@
       insurContainer.innerHTML += `${data.points_insurance}x reduction in point deduction`
     }
     insuranceCard(document.getElementById("user-insurance").innerHTML, data)
+    multiplierCard(document.getElementById("user-multiplier").innerHTML, data)
+    roleCard(document.getElementById("user-role").innerHTML, data)
+    
   })
 
+  function multiplierCard(multiplier, data){
+    if (multiplier == 1){
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-multiplier/${data.username}/2/`
+      multiplierHeader.innerHTML = "Point Multiplier Mk. I"
+      multiplierBody.innerHTML = "Cutting edge science has led to the development of the Point Multiplier Mk. I. This device will double the amount of points you receive for a correct answer and is available for the low, low cost of only <b>100</b> points."
+      multiplierBtn.onclick = function(){
+        if (data.points >= 100){
+          var secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/100/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
+    }
+    else if (multiplier == 2){
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-multiplier/${data.username}/5/`
+      multiplierHeader.innerHTML = "Point Multiplier Mk. II"
+      multiplierBody.innerHTML = "Further research and development has led to the creation of the Point Multiplier Mk. II! Unlike its predecessor, this will give you five times as many points for a correct answer. This upgrade will cost you <b>350</b> points."
+      multiplierBtn.onclick = function(){
+        if (data.points >= 350){
+          var secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/350/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
+    }
+    else if (multiplier == 5){
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-multiplier/${data.username}/10/`
+      multiplierHeader.innerHTML = "Point Multiplier Mk. III"
+      multiplierBody.innerHTML = "Surely there are no other upgrades to the point multiplier...surely it will not be completely free. Well there is good news and bad news...This upgrade will increase the amount of points you receive by 10 times <i>but</i> science isn't free so it will cost you <b>700</b> points."
+      multiplierBtn.onclick = function(){
+        if (data.points >= 700){
+          var secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/700/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
+    }
+    else if (multiplier == 10){
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-multiplier/${data.username}/15/`
+      multiplierHeader.innerHTML = "Point Multiplier Mk. V"
+      multiplierBody.innerHTML = "I know what you're thinking, what happened to Mk. IV? Well the Roman numeral for five looks cooler and if Xbox can go from 360 to 1, I can go from III to V. This upgrade will increase the amount of points you receive by 15 times. Epic marketing like this isn't free, however, and will cost you <b>1250</b> points."
+      multiplierBtn.onclick = function(){
+        if (data.points >= 1250){
+          var secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/1250/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
+    }
+    else if (multiplier == 15){
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-multiplier/${data.username}/20/`
+      multiplierHeader.innerHTML = "Point Multiplier Mk. VI"
+      multiplierBody.innerHTML = "Invention of the wheel, construction of the pyramids, the moon landing? Nope, this is singlehandedly humanity's greatest technological achievement. This upgrade will increase the amount of points you receive by <i>20 times!</i> Unlike the moon landing though, this is real and will cost you <b>2000</b> points."
+      multiplierBtn.onclick = function(){
+        if (data.points >= 2000) {
+          var secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/2000/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
+    }
+    else {
+      multiplierHeader.innerHTML = "Point Multiplier Fully Upgraded"
+      multiplierBody.innerHTML = "No further upgrades are available for the Point Multiplier...At least until we find out how to break the laws of physics or until the developer of this site stops being lazy."
+      multiplierBtn.disabled = true
+    }
+  }
+  
   function insuranceCard(insurance, data){
     if (insurance == 1){
       // fill for 3
@@ -99,8 +200,6 @@
       insuranceBody.innerHTML = "It's not much, but it's something. This plan will reduce point loss by 3x and costs <b>150</b> points."
       insuranceBtn.onclick = function(){
         if (data.points >= 150){
-          // var num = -150
-          // https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/cookjaco/10/
           var secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/150/`
           fetch(url)
           fetch(secondUrl)
@@ -167,11 +266,108 @@
       insuranceBtn.disabled = true
     }
   }
-  function multiplierCard(multiplier){
-    
-  }
-  function roleCard(role){
-    
+  function roleCard(role, data){
+    if (role == "None"){
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-role/${data.username}/Greenhorn/`
+      roleHeader.innerHTML = "Greenhorn"
+      roleBody.innerHTML = "Welcome new user! To get you started, I created a special role just for you! You may be wondering why it's not free then, but I still have to make ends meets so it will cost you <b>200</b> points."
+      roleBtn.onclick = function(){
+        if (data.points >= 200){
+          var secondUrl = `https:/ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/${200}/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
+    }
+    else if (role == "Greenhorn"){
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-role/${data.username}/Rising Linguist/`
+      roleHeader.innerHTML = "Rising Linguist"
+      roleBody.innerHTML = "'Greenhorn' just not cutting it? I have just the role for you! It's going to cost you <b>700</b> points, and if you come back, I'll see if I can find something better (for a price of course)."
+      roleBtn.onclick = function(){
+        if (data.points >= 700){
+          var secondUrl = `https:/ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/${700}/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
+    }
+    else if (role == "Rising Linguist"){
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-role/${data.username}/Guru/`
+      roleHeader.innerHTML = "Guru"
+      roleBody.innerHTML = "I think this is a perfect title to encapsulate your skills. This title can be yours for the low-low price of $19.99 (shipping + handling not included) or <b>1200</b> points. Operators are standing by so call now!"
+      roleBtn.onclick = function(){
+        if (data.points >= 1200){
+          var secondUrl = `https:/ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/${1200}/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
+    }
+    else if (role == "Guru"){
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-role/${data.username}/Imperator/`
+      roleHeader.innerHTML = "Imperator"
+      roleBody.innerHTML = "Now <i>this</i> is a cool title! But such a fine ware comes at a price, this title will cost you <b>1700</b> points."
+      roleBtn.onclick = function(){
+        if (data.points >= 1700){
+          var secondUrl = `https:/ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/${1700}/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
+    }
+    else if (role == "Imperator"){
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-role/${data.username}/Enlightened/`
+      roleHeader.innerHTML = "Enlightened"
+      roleBody.innerHTML = "Look how far you've come! My title stock is running out, but I have a few more for such a loyal customer like you! This particular title will cost you <b>2500</b> points."
+      roleBtn.onclick = function(){
+        if (data.points >= 2500){
+          var secondUrl = `https:/ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/${2500}/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
+    }
+    else if (role == "Enlightened" || role in goldenTitles){
+      var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-role/${data.username}/Scrooge McDuck/`
+      roleHeader.innerHTML = "Scrooge McDuck"
+      roleBody.innerHTML = "You might as well be swimming in all those points you have! This title can be yours for the small fee of <b>5000</b> points."
+      roleBtn.onclick = function(){
+        if (data.points >= 5000){
+          var secondUrl = `https:/ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${data.username}/${5000}/`
+          fetch(url)
+          fetch(secondUrl)
+          window.location.href = window.location.href
+        }
+        else {
+          alert("Insufficient funds!")
+        }
+      }
+    }
+    else if (role == "Scrooge McDuck"){
+      roleHeader.innerHTML = "All Titles Sold Out"
+      roleBody.innerHTML = "It looks like I'm completely out of stock (these supply chain issues I tell ya). <i>But...</i> there may be a few titles lurking on this page in secret. If I were you, I would look at position: absolute; bottom: 0; right: 0;"
+      roleBtn.disabled = true
+    }
   }
 </script>
 {% endblock %}

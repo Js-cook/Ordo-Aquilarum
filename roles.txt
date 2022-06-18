@@ -1,0 +1,8 @@
+Roles:
+-------
+1. Greenhorn
+2. Rising Linguist
+3. Guru
+4. Imperator
+5. Enlightened
+6. Scrooge McDuck
