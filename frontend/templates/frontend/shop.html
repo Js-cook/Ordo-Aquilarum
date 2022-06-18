@@ -3,6 +3,7 @@
 {% block title %}Shop{% endblock %}
 
 {% block content %}
+
 <p class="d-none" id="username">{{user.username}}</p>
 <nav class="navbar bg-light">
   <div class="container-fluid">
@@ -79,8 +80,21 @@
       </div>
     </div>
   </div>
+  <div id="hacker-card" class="d-flex justify-content-center d-none">
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Hacker</h5>
+        <p class="card-text">*Hacker voice* I'm in. 01000011 01101111 01101110 01100111 01110010 01100001 01110100 01110011 00100000 01101111 01101110 00100000 01100100 01101001 01110011 01100011 01101111 01110110 01100101 01110010 01101001 01101110 01100111 00100000 01110100 01101000 01100101 00100000 01101000 01100001 01100011 01101011 01100101 01110010 00100000 01110100 01101001 01110100 01101100 01100101 00101110</p>
+        <button id="hacker-btn" class="btn btn-primary">Acquire Title</button>
+      </div>
+    </div>
+  </div>
 </div>
-<button class="position-fixed bottom-0 end-0 opacity-0" onclick="toggleSecret()" style="cursor: default;">Secret</button>
+<div>
+  <h3 id="log"> > </h3>
+</div>
+<button class="position-fixed bottom-0 end-0 opacity-0" onclick="toggleSecret()" style="cursor: default;">Quid est hoc?</button>
 <script type="text/javascript">
   var user = document.getElementById("username").innerHTML
   var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-stats/${user}/`
@@ -100,7 +114,34 @@
   var roleBtn = document.getElementById("role-btn")
   // var goldenTitles = ["DEV", "Omniscient", "Hacker", "Cryptologist"]
   var goldenTitles = {DEV: "DEV", Omniscient: "Omniscient", Hacker: "Hacker", Cryptologist: "Cryptologist"}
+  var log = document.getElementById("log")
 
+  document.addEventListener("keydown", function(e){
+    var allowed = {KeyA: "KeyA", KeyB: "KeyB", ArrowUp: "ArrowUp", ArrowDown: "ArrowDown", ArrowLeft: "ArrowLeft", ArrowRight: "ArrowRight", Enter: "Enter"}
+    if (e.code in allowed){
+      log.innerHTML += ` ${e.code}`
+    }
+    if (e.code == "Enter"){
+      checkCode(log.innerHTML)
+    }
+  })
+
+  function checkCode(code){
+    if (code == " &gt;  ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight KeyB KeyA Enter"){
+      log.innerHTML = ""
+      var card = document.getElementById("hacker-card")
+      card.className = "d-flex justify-content-center"
+      document.getElementById("hacker-btn").onclick = function(){
+        var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-role/${user}/Hacker/`
+        fetch(url)
+        window.location.href = window.location.href
+      }
+    }
+    else {
+      log.innerHTML = ""
+    }
+  }
+  
   function toggleSecret(){
     var card = document.getElementById("omniscient-card")
     var omniscientBtn = document.getElementById("omniscient-btn")
@@ -396,7 +437,7 @@
     }
     else if (role == "Scrooge McDuck"){
       roleHeader.innerHTML = "All Titles Sold Out"
-      roleBody.innerHTML = "It looks like I'm completely out of stock (these supply chain issues I tell ya). <i>But...</i> there may be a few titles lurking on this page in secret. If I were you, I would look at position: absolute; bottom: 0; right: 0;"
+      roleBody.innerHTML = "It looks like I'm completely out of stock (these supply chain issues I tell ya). <i>But...</i> there may be a few titles lurking on this page in secret. If I were you, I would look at position: fixed; bottom: 0; right: 0;"
       roleBtn.disabled = true
     }
   }
