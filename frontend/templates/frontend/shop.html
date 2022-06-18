@@ -65,8 +65,22 @@
     </div>
   </div>
 </div>
-<div class="position-absolute   alert alert-danger d-none sticky-bottom d-none" id="status-bar"><p>Insufficient funds!</p></div>
-
+<hr>
+<div class="container mt-4">
+  <h2>Secret Roles</h2>
+  <p>Shhhhh...</p>
+  <div id="omniscient-card" class="d-flex justify-content-center d-none">
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Omniscient</h5>
+        <p class="card-text">What is this, a secret title? You either found this after solving my riddle or you randomly clicked the corner of your screen, either way congrats.</p>
+        <button id="omniscient-btn" class="btn btn-primary">Acquire Title</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="position-fixed bottom-0 end-0 opacity-0" onclick="toggleSecret()" style="cursor: default;">Secret</button>
 <script type="text/javascript">
   var user = document.getElementById("username").innerHTML
   var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-stats/${user}/`
@@ -86,6 +100,23 @@
   var roleBtn = document.getElementById("role-btn")
   // var goldenTitles = ["DEV", "Omniscient", "Hacker", "Cryptologist"]
   var goldenTitles = {DEV: "DEV", Omniscient: "Omniscient", Hacker: "Hacker", Cryptologist: "Cryptologist"}
+
+  function toggleSecret(){
+    var card = document.getElementById("omniscient-card")
+    var omniscientBtn = document.getElementById("omniscient-btn")
+    if (card.className == "d-flex justify-content-center d-none"){
+      card.className = "d-flex justify-content-center"
+      omniscientBtn.onclick = function(){
+        var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-role/${user}/Omniscient/`
+        fetch(url)
+        window.location.href = window.location.href
+      }
+    }
+    else {
+      card.className = "d-flex justify-content-center d-none"
+    }
+  }
+  
   fetch(url)
   .then((resp) => resp.json())
   .then(function(data){
