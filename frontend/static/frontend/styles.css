@@ -80,10 +80,14 @@
   color: #36383c !important;
 }
 
-#incorrect-banner {
+/* #incorrect-banner {
   
 }
 
 #correct-banner {
   
+} */
+
+#person-icon {
+  font-size: 40px !important;
 }

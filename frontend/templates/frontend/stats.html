@@ -19,11 +19,17 @@
 </div>
 <hr>
 <div class="container text-center">
+  <h1 id="person-icon" class="d-none"><svg xmlns="http://www.w3.org/2000/svg" width="85" height="85" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+</svg></h1>
   <h1 id="user-placeholder"></h1>
-  <h4 id="correct-placeholder"></h4>
-  <h4 id="incorrect-placeholder"></h4>
-  <h4 id="points-placeholder"></h4>
   <h3 id="role-placeholder"></h3>
+  <div class="row g-1 mt-3">
+    <h4 class="col me-3" id="correct-placeholder"></h4>
+    <h4 class="col me-3" id="incorrect-placeholder"></h4>
+    <h4 class="col me-3" id="points-placeholder"></h4>
+  </div>
 </div>
 <script>
   function selfBtn(){
@@ -37,6 +43,7 @@
   var incorrectPlaceholder = document.getElementById("incorrect-placeholder")
   var pointsPlaceholder = document.getElementById("points-placeholder")
   var rolePlaceholder = document.getElementById("role-placeholder")
+  var goldenRoles = ["DEV", "Hacker", "Cryptologist", "Scrooge McDuck", "Omniscient"]
   usernamePlaceholder.innerHTML = ""
   correctPlaceholder.innerHTML = ""
   incorrectPlaceholder.innerHTML = ""
@@ -46,11 +53,18 @@
   fetch(url)
   .then((resp) => resp.json())
   .then(function(data){
-    usernamePlaceholder.innerHTML = `Showing data for ${data.username}`
-    correctPlaceholder.innerHTML = `Questions correct: ${data.correct}`
-    incorrectPlaceholder.innerHTML = `Questions incorrect: ${data.incorrect}`
-    pointsPlaceholder.innerHTML = `Points: ${data.points}`
-    rolePlaceholder.innerHTML = `Role: ${data.role}`
+    document.getElementById("person-icon").className = ""
+    if(goldenRoles.includes(data.role)){
+      var color = "warning"
+    }
+    else {
+      var color = "primary" 
+    }
+    usernamePlaceholder.innerHTML = `${data.username}`
+    correctPlaceholder.innerHTML = `✅ ${data.correct}`
+    incorrectPlaceholder.innerHTML = `❌ ${data.incorrect}`
+    pointsPlaceholder.innerHTML = `⭐ ${data.points}`
+    rolePlaceholder.innerHTML = `<span class="badge text-bg-${color} border-${color}">${data.role}</span>`
   })
   .catch(
     usernamePlaceholder.innerHTML = "Data for the specified user could not be found. Check the information you entered and try again."
