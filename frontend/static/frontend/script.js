@@ -17,6 +17,7 @@ var formWrapper = document.getElementById("form-wrapper")
 var adjFormWrapper = document.getElementById("second-form-wrapper")
 var pointsMultiplier = document.getElementById("point-mult").innerHTML
 var pointsInsurance = document.getElementById("point-insur").innerHTML
+var qId = null
 
 function retrieveQuestion(){
   var qType = Math.floor(Math.random() * 2)
@@ -50,6 +51,7 @@ function retrieveQuestion(){
           number_container.innerHTML += list[i].number
         }
         header.innerHTML = list[0].term
+        qId = list[0].id
       })
     }
     else if(qType == 1){
@@ -69,6 +71,7 @@ function retrieveQuestion(){
         adjFormWrapper.className = ""
         var btn = Math.floor(Math.random() * 3)
         var resp_selec = data[0]
+        qId = data[0].id
         var splitTerm = resp_selec.term.split(" ")
 
         var secondSplit = data[1].term.split(" ")
@@ -115,6 +118,9 @@ function changeStats(result){
     fetch(url)
     var secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-points/${user}/${subtracted}/`
     fetch(secondUrl)
+    console.log(qId)
+    var thirdUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-ques-incorrect/${qId}/`
+    fetch(thirdUrl)
     // retrieveQuestion()
   }
 }
