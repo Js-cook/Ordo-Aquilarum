@@ -7,6 +7,7 @@ class Question(models.Model):
   number = models.CharField(max_length=5)
   gender = models.CharField(max_length=5)
   declension = models.CharField(max_length=15)
+  times_incorrect = models.IntegerField(default=0)
 
   class Meta:
     indexes = [models.Index(fields=["declension"])]

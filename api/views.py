@@ -173,3 +173,11 @@ def change_role(request, username, role):
   extension.role = role
   extension.save()
   return Response(f"Role updated to {role}")
+
+@api_view(["GET"])
+def add_ques_incor(request, qid):
+  question = Question.objects.get(id=qid)
+  question.times_incorrect += 1
+  question.save()
+  return Response("Question updated")
+  
