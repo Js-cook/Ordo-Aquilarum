@@ -13,15 +13,17 @@
   </svg>
 </button>  
 </div>
-<table id="leader-table" class="table">
-  <thead>
-    <tr>
-      <th scope="col">Position</th>
-      <th scope="col">Username</th>
-      <th scope="col">Points</th>
-    </tr>
-  </thead>
-</table>
+<div class="container mt-4">
+  <table id="leader-table" class="table">
+    <thead>
+      <tr>
+        <th scope="col">Position</th>
+        <th scope="col">Username</th>
+        <th scope="col">Points</th>
+      </tr>
+    </thead>
+  </table>
+</div>
 <script>
   function retrieve(){
     console.log("button pressed")
@@ -47,7 +49,7 @@
         <tr>
           <td>${counter}</td>
           <td>${list[x].username}</td>
-          <td>${list[x].correct}</td>
+          <td>${list[x].points}</td>
         </tr>
         `
         counter += 1

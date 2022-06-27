@@ -43,7 +43,7 @@ def ind_stats(request, username):
 @api_view(["GET"])
 def all_stats(request):
   # all_extensions = UserExtension.objects.all()
-  all_extensions = UserExtension.objects.order_by("-correct")
+  all_extensions = UserExtension.objects.order_by("-points")
   serializer = UserExtensionSerializer(all_extensions, many=True)
   return Response(serializer.data)
   
