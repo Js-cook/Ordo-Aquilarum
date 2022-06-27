@@ -17,39 +17,44 @@
   <div class="offcanvas-body">
     <div class="container">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">
+        <a href="{% url 'index' %}" class="link"><li class="list-group-item border-bottom border-top-0 border-start-0 border-end-0">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
             <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
           </svg>
-          <a class="link" href="{% url 'index' %}">Home</a>
-        </li>
-        <li class="list-group-item">
+          Home
+<!--           <a class="link" href="{% url 'index' %}">Home</a> -->
+        </li></a>
+        <a class="link" href="{% url 'stats' %}"><li class="list-group-item border-bottom border-top-0 border-start-0 border-end-0">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
           </svg>
-          <a class="link" href="{% url 'stats' %}">Stat Lookup</a>
-        </li>
-        <li class="list-group-item">
+          Stat Lookup
+<!--           <a class="link" href="{% url 'stats' %}">Stat Lookup</a> -->
+        </li></a>
+        <a class="link" href="{% url 'shop' %}"><li class="list-group-item border-bottom border-top-0 border-start-0 border-end-0">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
           </svg>
-          <a class="link" href="{% url 'shop' %}">Shop</a>
-        </li>
-        <li class="list-group-item">
+          Shop
+<!--           <a class="link" href="{% url 'shop' %}">Shop</a> -->
+        </li></a>
+        <a class="link" href="{% url 'leaderboard' %}"><li class="list-group-item border-bottom border-top-0 border-start-0 border-end-0">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-award" viewBox="0 0 16 16">
             <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193.684 1.365 1.086 1.072L12.387 6l.248 1.506-1.086 1.072-.684 1.365-1.51.229L8 10.874l-1.355-.702-1.51-.229-.684-1.365-1.086-1.072L3.614 6l-.25-1.506 1.087-1.072.684-1.365 1.51-.229L8 1.126l1.356.702 1.509.229z"/>
             <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
           </svg>
-          <a class="link" href="{% url 'leaderboard' %}">Leaderboard</a>
-        </li>
+              Leaderboard
+<!--           <a class="link" href="{% url 'leaderboard' %}">Leaderboard</a> -->
+        </li></a>
         {% if usern.is_teacher %}
-        <li class="list-group-item">
+        <a class="link" href="{% url 'teacher-portal' %}"><li class="list-group-item border-bottom border-top-0 border-start-0 border-end-0">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5Z"/>
           </svg>
-          <a class="link" href="{% url 'teacher-portal' %}">Teacher Portal</a>
-        </li>
+          Teacher Portal
+<!--           <a class="link" href="{% url 'teacher-portal' %}">Teacher Portal</a> -->
+        </li></a>
         {% endif %}
       </ul>
     </div>

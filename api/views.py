@@ -181,3 +181,9 @@ def add_ques_incor(request, qid):
   question.save()
   return Response("Question updated")
   
+@api_view(["GET"])
+def get_top_ten(request):
+  all = Question.objects.all().order_by("-times_incorrect")
+  sliced = all[:10]
+  serializer = QuestionSerializer(sliced, many=True)
+  return Response(serializer.data)

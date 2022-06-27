@@ -25,6 +25,26 @@
     
   </div>
 </div>
+<hr>
+<div class="container">
+  <h2>Problem Questions</h2>
+  <p>These questions have been identified as the top ten questions answered incorrectly the most.</p>
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Term</th>
+          <th scope="col">Declension</th>
+          <th scope="col">Times Incorrect</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <script>
   var result = document.getElementById("result")
@@ -72,5 +92,25 @@
     })
   }
   refreshClasses()
+
+  function populateTable(){
+    var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/get-top-ten/`
+    var tableBody = document.getElementById("table-body")
+    fetch(url)
+    .then((resp) => resp.json())
+    .then(function(data){
+      for (var i=0; i<data.length; i++){
+        tableBody.innerHTML += `
+        <tr>
+          <th scope="row">${i+1}</th>
+          <td>${data[i].term}</td>
+          <td>${data[i].declension}</td>
+          <td>${data[i].times_incorrect}</td>
+        </tr>
+        `
+      }
+    })
+  }
+  populateTable()
 </script>
 {% endblock %}

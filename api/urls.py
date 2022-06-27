@@ -19,5 +19,6 @@ urlpatterns = [
     path("add-multiplier/<str:username>/<int:amount>/", views.add_multiplier, name="add-multiplier"),
     path("add-insurance/<str:username>/<int:amount>/", views.add_insurance, name="add-insurance"),
     path("change-role/<str:username>/<str:role>/", views.change_role, name="change-role"),
-    path("add-ques-incorrect/<str:qid>/", views.add_ques_incor, name="add-ques-incorrect")
+    path("add-ques-incorrect/<str:qid>/", views.add_ques_incor, name="add-ques-incorrect"),
+    path("get-top-ten/", views.get_top_ten, name="get-top-ten")
 ]
