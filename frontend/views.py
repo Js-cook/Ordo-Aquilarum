@@ -48,7 +48,25 @@ def class_view(request, name):
     return render(request, "frontend/class.html", {"class_name":name})
   else:
     return redirect("index")
+    
 @login_required
 def shop(request):
   user = UserExtension.objects.get(username=request.user.username)
   return render(request, "frontend/shop.html", {"user": user, "usern": user})
+
+def register(request):
+  if request.method == "POST":
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      form.save()
+      username = form.cleaned_data["username"]
+      password = form.cleaned_data["password1"]
+      user = authenticate(username=username, password=password)
+      user_extension = UserExtension(username=username)
+      user_extension.save()
+      login(request, user)
+      return redirect("index")
+  else:
+    form = UserCreationForm()
+  context = {"form": form}
+  return render(request, "registration/register.html", context)
