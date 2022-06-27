@@ -30,7 +30,8 @@ def stats(request):
 
 @login_required
 def leaderboard(request):
-  return render(request, "frontend/leader.html")
+  user = UserExtension.objects.get(username=request.user.username)
+  return render(request, "frontend/leader.html", {"usern": user})
 
 @login_required
 def teacher(request):
@@ -50,4 +51,4 @@ def class_view(request, name):
 @login_required
 def shop(request):
   user = UserExtension.objects.get(username=request.user.username)
-  return render(request, "frontend/shop.html", {"user": user})
+  return render(request, "frontend/shop.html", {"user": user, "usern": user})
