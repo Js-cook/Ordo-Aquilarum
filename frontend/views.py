@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from api.models import UserExtension
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
 # Create your views here.
 def index(request):
@@ -69,4 +70,4 @@ def register(request):
   else:
     form = UserCreationForm()
   context = {"form": form}
-  return render(request, "registration/register.html", context)
+  return render(request, "registration/registration.html", context)

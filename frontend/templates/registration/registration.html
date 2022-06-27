@@ -3,17 +3,19 @@
 {% block title %}Registration{% endblock %}
 
 {% block content %}
-<form method="post" action="{% url 'register' %}">
-  {% csrf_token %}
-
-  {% if form.errors %}
-  <div class="alert alert-danger" role="alert">
-  Something went wrong while submitting the form. Please try again.
-  </div>
-  {% endif %}
-
-  {{form}}
-
-  <input type="submit" value="Register">
-</form>
+<div class="d-flex justify-content-center mt-4">
+  <form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+  
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+    Something went wrong while submitting the form. Please try again.
+    </div>
+    {% endif %}
+  
+    {{form}}
+    <br>
+    <input type="submit" value="Register" class="btn btn-primary">
+  </form>
+</div>
 {% endblock %}
