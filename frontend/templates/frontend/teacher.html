@@ -21,9 +21,9 @@
 <div class="container">
   <h2>Classes</h2>
   <button class="btn btn-primary" onclick="refreshClasses()">Refresh</button>
-  <ul id="class-list" class="mt-4">
+  <div id="class-list" class="mt-4 list-group">
     
-  </ul>
+  </div>
 </div>
 
 <script>
@@ -63,13 +63,14 @@
       for (var i=0; i<list.length; i++){
         var name = list[i].name
         // classList.innerHTML += `
-        // <li><a href="{% url 'class-view' name="${name}" %}">${name}</a></li>
+        // <li><a href="https://ordo-aquilarum.p3rplexed.repl.co/classes/${name}/">${name}</a></li>
         // `
         classList.innerHTML += `
-        <li><a href="https://ordo-aquilarum.p3rplexed.repl.co/classes/${name}/">${name}</a></li>
+        <a class="list-group-item" href="https://ordo-aquilarum.p3rplexed.repl.co/classes/${name}/">${name}</a>
         `
       }
     })
   }
+  refreshClasses()
 </script>
 {% endblock %}
