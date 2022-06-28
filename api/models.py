@@ -39,3 +39,12 @@ class Session(models.Model):
 
   def __str__(self):
     return(f"{self.username} - {self.date}")
+
+# If this model exists for a certain date, open the view function in frontend
+class Competition(models.Model):
+  date = models.DateField(auto_now=True)
+  time_start = models.TimeField()
+  time_end = models.TimeField()
+
+  def __str__(self):
+    return(f"{self.date}")

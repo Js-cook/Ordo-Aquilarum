@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from api.models import UserExtension
+from api.models import UserExtension, Competition
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
+import datetime
+from django.http import HttpResponse
+
 # Create your views here.
 def index(request):
   user = request.user
@@ -71,3 +74,14 @@ def register(request):
     form = UserCreationForm()
   context = {"form": form}
   return render(request, "registration/registration.html", context)
+
+def test(request):
+  exists = list(Competition.objects.filter(date=datetime.date.today()))
+  set_dt = f"{exists[0].date} {exists[0].time_end}"
+  current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+  str1 = datetime.datetime.fromisoformat(set_dt)
+  str2 = datetime.datetime.fromisoformat(current_time)
+  if len(exists) > 0:
+    if str2 < str1:
+      return render(request, "frontend/competition.html")
+  return HttpResponse("Page not currently available")

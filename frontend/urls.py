@@ -9,5 +9,7 @@ urlpatterns = [
     path("teacher-portal", views.teacher, name="teacher-portal"),
     path("classes/<str:name>/", views.class_view, name="class-view"),
     path("shop", views.shop, name="shop"),
-    path("register", views.register, name="register")
+    path("register", views.register, name="register"),
+    # Delete this after 
+    path("test", views.test, name="test")
 ]
