@@ -1,3 +1,97 @@
-<h1>Welcome</h1>
+{% extends 'sbase.html' %}
+{% load static %}
 
-<p>balls</p>
+{% block title %}Certamen{% endblock %}
+
+{% block content %}
+<p id="time-now" class="d-none">{{js_start}}</p>
+<p class="d-none" id="time-end">{{js_end}}</p>
+<nav class="navbar bg-light">
+  <div class="container-fluid">
+    <p class="navbar-brand">{{start}}</p>
+    <p class="navbar-brand float-end">{{end}}</p>
+  </div>
+</nav>
+<p class="d-none" id="logged-user">{{request.user.username}}</p>
+<p class="d-none" id="mult"></p>
+<p class="d-none" id="insurance"></p>
+<div class="d-flex">
+  <div class=" flex-fill">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Username</th>
+          <th>Points</th>
+          <th>Target</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        
+      </tbody>
+    </table>
+  </div>
+  <div class="flex-fill border-start">
+    <div class="text-center mt-4" id="case-num">
+      <div class="border border-3 d-inline-block p-5 rounded">
+        <p class="d-none" id="selected-declension"></p>
+        <h1 id="question"></h1>
+      </div>
+    </div>
+    <div id="form-wrapper" class="">
+      <form id="form">
+        <div class="d-flex justify-content-center mt-4">
+          <div class="form-check form-check-inline">
+            <label for="nom">Nominative</label>
+            <input type="radio" id="nom" name="case" value="Nominative">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="gen">Genitive</label>
+            <input type="radio" id="gen" name="case" value="Genitive">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="dat">Dative</label>
+            <input type="radio" id="dat" name="case" value="Dative">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="acc">Accusative</label>
+            <input type="radio" id="acc" name="case" value="Accusative">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="abl">Ablative</label>
+            <input type="radio" id="abl" name="case" value="Ablative">
+          </div>
+        </div>
+        <br>
+        <div class="d-flex justify-content-center"> 
+          <div class="form-check form-check-inline">
+            <label for="sg">Singular</label>
+            <input type="radio" id="sg" name="number" value="sg.">
+          </div>
+          <div class="form-check form-check-inline">
+            <label for="pl">Plural</label>
+            <input type="radio" id="pl" name="number" value="pl.">
+          </div>
+        </div>
+    
+        <div class="d-flex justify-content-center mt-4">
+          <input type="submit" value="Check" id="submit-btn" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+    <div class="position-absolute bottom-0 start-50 translate-middle-x alert alert-danger d-none" id="incorrect-banner">
+      Incorrect! Answers include:
+      <div id="case-answers"></div>
+      <div id="number-answers"></div>
+      <div id="adj-answer"></div>
+      <button class="btn btn-danger" onclick="retrieveQuestion()">Continue</button>
+    </div>
+    <div class="position-absolute bottom-0 start-50 translate-middle-x alert alert-success d-none" id="correct-banner">
+      Correct! Nicely done.
+      <button class="btn btn-success" onclick="retrieveQuestion()">Continue</button>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="{% static 'frontend/competition.js' %}"></script>
+{% endblock %}

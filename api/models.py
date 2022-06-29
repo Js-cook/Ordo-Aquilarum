@@ -25,6 +25,10 @@ class UserExtension(models.Model):
   points_multiplier = models.IntegerField(default=1)
   points_insurance = models.IntegerField(default=1)
 
+  comp_points = models.IntegerField(default=0)
+  comp_multiplier = models.IntegerField(default=1)
+  comp_insurance = models.IntegerField(default=1)
+
   def __str__(self):
     return(self.username)
 

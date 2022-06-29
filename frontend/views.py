@@ -5,6 +5,7 @@ from api.models import UserExtension, Competition
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
 import datetime
+from datetime import timedelta
 from django.http import HttpResponse
 
 # Create your views here.
@@ -77,11 +78,20 @@ def register(request):
 
 def test(request):
   exists = list(Competition.objects.filter(date=datetime.date.today()))
-  set_dt = f"{exists[0].date} {exists[0].time_end}"
-  current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-  str1 = datetime.datetime.fromisoformat(set_dt)
-  str2 = datetime.datetime.fromisoformat(current_time)
   if len(exists) > 0:
-    if str2 < str1:
-      return render(request, "frontend/competition.html")
+    set_dt = f"{exists[0].date} {exists[0].time_end}"
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    str1 = datetime.datetime.fromisoformat(set_dt)
+    str2 = datetime.datetime.fromisoformat(current_time)
+    if len(exists) > 0:
+      if str2 < str1:
+        adjusted_start = str2 - timedelta(hours=4)
+        adjusted_end = str1 - timedelta(hours=4)
+        js_start = adjusted_start.isoformat()
+        js_end = adjusted_end.isoformat()
+        return render(request, "frontend/competition.html", {"start": adjusted_start, "end": adjusted_end, "js_start":js_start, "js_end":js_end})
   return HttpResponse("Page not currently available")
+
+def demo(request):
+  extension = UserExtension.objects.get(username=request.user.username)
+  return render(request, "frontend/competition.html", {"usern": extension})

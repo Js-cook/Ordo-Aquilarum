@@ -20,5 +20,10 @@ urlpatterns = [
     path("add-insurance/<str:username>/<int:amount>/", views.add_insurance, name="add-insurance"),
     path("change-role/<str:username>/<str:role>/", views.change_role, name="change-role"),
     path("add-ques-incorrect/<str:qid>/", views.add_ques_incor, name="add-ques-incorrect"),
-    path("get-top-ten/", views.get_top_ten, name="get-top-ten")
+    path("get-top-ten/", views.get_top_ten, name="get-top-ten"),
+    path("get-comp-users/", views.get_comp_users, name="get-comp-users"),
+    path("add-comp-points/<str:username>/<int:amount>/", views.add_comp_points, name="add-comp-points"),
+    path("subtract-comp-points/<str:username>/<int:amount>/", views.subtract_comp_points, name="subtract-comp-points"),
+    path("add-comp-insurance/<str:username>/<int:amount>/", views.add_comp_insurance, name="add-comp-insurance"),
+    path("add-comp-multiplier/<str:username>/<int:amount>/", views.add_comp_multiplier, name="add-comp-multiplier")
 ]

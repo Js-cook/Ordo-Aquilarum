@@ -187,3 +187,38 @@ def get_top_ten(request):
   sliced = all[:10]
   serializer = QuestionSerializer(sliced, many=True)
   return Response(serializer.data)
+
+@api_view(["GET"])
+def get_comp_users(request):
+  users = UserExtension.objects.all().order_by("-comp_points")
+  serializer = UserExtensionSerializer(users, many=True)
+  return Response(serializer.data)
+
+@api_view(["GET"])
+def add_comp_points(request, username, amount):
+  extension = UserExtension.objects.get(username=username)
+  extension.comp_points += amount
+  extension.save()
+  return Response("Points updated")
+
+@api_view(["GET"])
+def subtract_comp_points(request, username, amount):
+  extension = UserExtension.objects.get(username=username)
+  extension.comp_points -= amount
+  extension.save()
+  return Response("Points updated")
+
+@api_view(["GET"])
+def add_comp_insurance(request, username, amount):
+  extension = UserExtension.objects.get(username=username)
+  extension.comp_insurance = amount
+  extension.save()
+  return Response("Insurance updated")
+
+@api_view(["GET"])
+def add_comp_multiplier(request, username, amount):
+  extension = UserExtension.objects.get(username=username)
+  extension.comp_multiplier = amount
+  extension.save()
+  return Response("Multiplier updated")
+  
