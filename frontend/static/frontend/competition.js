@@ -78,6 +78,7 @@ function retrieveQuestion(){
   let currentDateTime = new Date()
   if (currentDateTime >= endDateTime){
     document.getElementById("end-modal").click()
+    enableRewards()
   }
   let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-question/all/`
   const questionPlaceholder = document.getElementById("question")
@@ -112,6 +113,7 @@ function checkAnswer(caseAns, numAns){
   let currentDateTime = new Date()
   if (currentDateTime >= endDateTime){
     document.getElementById("end-modal").click()
+    enableRewards()
   }
   let ansCorrect = false
   const caseContainer = document.getElementById("case-answers").innerHTML
@@ -169,8 +171,8 @@ function enableRewards(){
 }
 
 function addPoints(amount, btn){
-  const btn = document.getElementById(btn)
-  btn.disabled = true
+  const fbtn = document.getElementById(btn)
+  fbtn.disabled = true
   let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-points/${loggedUser}/${amount}/`
   fetch(url)
 }
