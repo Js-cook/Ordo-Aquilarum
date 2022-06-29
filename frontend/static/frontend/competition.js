@@ -31,12 +31,14 @@ function addMultiplier(amount){
 function updateLeaderboard(){
   let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/get-comp-users/`
   const container = document.getElementById("table-body")
+  const finContainer = document.getElementById("fin-table-body")
   container.innerHTML = ""
+  finContainer.innerHTML = ""
   fetch(url)
   .then((resp) => resp.json())
   .then(function(data){
     for (var i=0; i<data.length; i++){
-      if (i <= 9){
+      if (i <= 9 && data[i].comp_points != 0){
         container.innerHTML += `
         <tr>
           <th scope="row">${i+1}</th>
@@ -46,7 +48,7 @@ function updateLeaderboard(){
         </tr>
         `
       }
-      else if (data[i].username == loggedUser){
+      else if (data[i].username == loggedUser && data[i].comp_points != 0){
         container.innerHTML += `
         <tr>
           <th scope="row">${i+1}</th>
@@ -54,6 +56,16 @@ function updateLeaderboard(){
           <td>${data[i].comp_points}</td>
         </tr>
         ` 
+      }
+
+      if (data[i].comp_points != 0){
+        finContainer.innerHTML += `
+        <tr>
+          <th scope="row">${i+1}</th>
+          <td>${data[i].username}</td>
+          <td>${data[i].comp_points}</td>
+        </tr>
+        `
       }
     }
   })
@@ -134,6 +146,38 @@ function changeStats(result){
     fetch(url)
   }
   updateLeaderboard()
+}
+
+function enableRewards(){
+  const firstPrize = document.getElementById("first-prize")
+  const secondPrize = document.getElementById("second-prize")
+  const thirdPrize = document.getElementById("third-prize")
+  let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/get-comp-users/`
+  fetch(url)
+  .then((resp) => resp.json())
+  .then(function(data){
+    if (data[0].username == loggedUser){
+      firstPrize.className = ""
+    }
+    else if (data[1].username == loggedUser){
+      secondPrize.className = ""
+    }
+    else if (data[2].username == loggedUser){
+      thirdPrize.className = ""
+    }
+  })
+}
+
+function addPoints(amount, btn){
+  const btn = document.getElementById(btn)
+  btn.disabled = true
+  let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-points/${loggedUser}/${amount}/`
+  fetch(url)
+}
+
+function addTitle(){
+  let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-role/${loggedUser}/Champion/`
+  fetch(url)
 }
 
 // updateLeaderboard()

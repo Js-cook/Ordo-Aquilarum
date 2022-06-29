@@ -17,8 +17,60 @@
         <h5 class="modal-title" id="staticBackdropLabel">Game End</h5>
       </div>
       <div class="modal-body">
-        ...
-      </div>
+        <div class="container">
+          <p>Looks like this game is finished! How did you stack up against your peers? Use the leaderboard below to see where you rank. (Only first, second, and third places receive prizes)</p>
+        </div>
+        <div class="container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Points</th>
+<!--                 <th scope="col"></th> -->
+              </tr>
+            </thead>
+            <tbody id="fin-table-body">
+              
+            </tbody>
+          </table>
+        </div>
+        <div id="first-prize" class="d-none">
+          <div class="d-flex justify-content-center">
+              <div class="container border rounded me-2 pt-4 pb-4">
+                <h3>"Champion" Title</h3>
+                <p>Congrats on your first place victory! As a reward you will be granted a shiny new title to proudly display your triumph. </p>
+                <div class="d-flex justify-content-center">
+                  <button onclick="addTitle()" class="btn btn-primary">Accept Reward</button>
+                </div>
+              </div>
+          </div>
+          <div class="container border rounded ms-2 pt-4 pb-4">
+            <h3>5000 Points</h3>
+            <p>What's a competition without a healthy cash prize? While I cannot offer you actual money, I can grant you a large sum of points (5000 to be more specific).</p>
+            <div class="d-flex justify-content-center">
+              <button id="first-btn" class="btn btn-primary" onclick="addPoints(5000, 'first-btn')">Accept Reward</button>
+            </div>
+          </div>
+        </div>
+        <div id="second-prize" class="d-none">
+          <div class="container border rounded ms-2 pt-4 pb-4">
+            <h3>2500 Points</h3>
+            <p>Second place, Congrats! I can't offer you a title, but I can give you a slighly smaller sum of points (2500). </p>
+            <div class="d-flex justify-content-center">
+              <button id="second-btn" class="btn btn-primary" onclick="addPoints(2500, 'second-btn')">Accept Reward</button>
+            </div>
+          </div>
+        </div>
+        <div id="third-prize" class="d-none">
+          <div class="container border rounded ms-2 pt-4 pb-4">
+            <h3>1000 Points</h3>
+            <p>Third place! Not quite as good as first or second, but a podium finish is still pretty nice! As a reward, you will be granted 1000 points.</p>
+            <div class="d-flex justify-content-center">
+              <button id="third-btn" class="btn btn-primary" onclick="addPoints(1000, 'third-btn')">Accept Reward</button>
+            </div>
+          </div>
+        </div>
       <div class="modal-footer">
         <a class="btn btn-primary" href="{%url 'index'%}">Home</a>
       </div>
