@@ -65,7 +65,7 @@ function retrieveQuestion(){
   let endDateTime = new Date(endTime)
   let currentDateTime = new Date()
   if (currentDateTime >= endDateTime){
-    window.location.href = "https://ordo-aquilarum.p3rplexed.repl.co/"
+    document.getElementById("end-modal").click()
   }
   let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-question/all/`
   const questionPlaceholder = document.getElementById("question")
@@ -96,6 +96,11 @@ formWrapper.addEventListener("submit", function(e){
 })
 
 function checkAnswer(caseAns, numAns){
+  let endDateTime = new Date(endTime)
+  let currentDateTime = new Date()
+  if (currentDateTime >= endDateTime){
+    document.getElementById("end-modal").click()
+  }
   let ansCorrect = false
   const caseContainer = document.getElementById("case-answers").innerHTML
   const possibleCase = caseContainer.split(" ")
