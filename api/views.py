@@ -6,10 +6,12 @@ from rest_framework.response import Response
 from .models import Question, UserExtension, Session
 from django.contrib.auth.models import Group, User
 
-from .serializers import UserExtensionSerializer, QuestionSerializer, GroupSerializer, SessionSerializer
+from .serializers import UserExtensionSerializer, QuestionSerializer, GroupSerializer, SessionSerializer, CompetitionSerializer
 from .adj_gen import generate_adj
 
 import random
+import datetime
+from datetime import timedelta
 
 # Create your views here.
 @api_view(["GET"])
@@ -228,3 +230,17 @@ def reset_comp_points(request, username):
   extension.comp_points = 0
   extension.save()
   return Response("Points reset")
+
+@api_view(["POST"])
+def new_comp(request):
+  response = request.data["time_end"]
+  date_str = datetime.date.today()
+  full_str = f"{str(date_str)} {response}"
+  fin = datetime.datetime.fromisoformat(full_str) + timedelta(hours=4)
+  final_data = {
+    "time_end": fin.time()
+  }
+  serializer = CompetitionSerializer(data=final_data)
+  if serializer.is_valid():
+    serializer.save()
+  return Response(serializer.data)

@@ -45,7 +45,19 @@
     </table>
   </div>
 </div>
-
+<hr>
+<div class="container">
+  <h2>Certamen</h2>
+  <p>Use the form below to start a new session. The game will be open for all users and begins as soon as this form is submitted. <b>Please note, only one game can be active at one time.</b></p>
+</div>
+<div class="container" id="form-rap">
+  <form>
+    <label for="time-end">Time end</label>
+    <br>
+    <input name="time-end" type="time" id="time-selection">
+    <input type="submit" value="Start Game" class="btn btn-primary">
+  </form>
+</div>
 <script>
   var result = document.getElementById("result")
   var wrap = document.getElementById("form-wrap")
@@ -112,5 +124,39 @@
     })
   }
   populateTable()
+
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+
+  let csrf_token = getCookie("csrftoken")
+  const formw = document.getElementById("form-rap")
+  formw.addEventListener("submit", function(e){
+    e.preventDefault()
+    const entry = document.getElementById("time-selection").value
+    let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/new-comp/`
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "X-CSRFToken": csrf_token,
+      },
+      body: JSON.stringify({
+        "time_end": entry
+      })
+    })
+  })
 </script>
 {% endblock %}

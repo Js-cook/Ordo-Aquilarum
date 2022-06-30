@@ -47,7 +47,7 @@ class Session(models.Model):
 # If this model exists for a certain date, open the view function in frontend
 class Competition(models.Model):
   date = models.DateField(auto_now=True)
-  time_start = models.TimeField()
+  time_start = models.TimeField(auto_now=True)
   time_end = models.TimeField()
 
   class Meta:
