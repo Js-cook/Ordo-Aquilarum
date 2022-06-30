@@ -10,10 +10,19 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
+  any_comps = False
   user = request.user
+  comps = list(Competition.objects.filter(date=datetime.date.today()))
+  if comps:
+    set_dt = f"{comps[0].date} {comps[0].time_end}"
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    str1 = datetime.datetime.fromisoformat(set_dt)
+    str2 = datetime.datetime.fromisoformat(current_time)
+    if str2 < str1:
+      any_comps = True
   if user.is_authenticated:
     user_extension = UserExtension.objects.get(username=request.user.username)
-    return render(request, "frontend/index.html", {"usern": user_extension})
+    return render(request, "frontend/index.html", {"usern": user_extension, "comps": any_comps})
   else:
     return redirect("login")
 
@@ -76,7 +85,7 @@ def register(request):
   context = {"form": form}
   return render(request, "registration/registration.html", context)
 
-def test(request):
+def certamen(request):
   exists = list(Competition.objects.filter(date=datetime.date.today()))
   if len(exists) > 0:
     set_dt = f"{exists[0].date} {exists[0].time_end}"
@@ -92,6 +101,3 @@ def test(request):
         return render(request, "frontend/competition.html", {"start": adjusted_start, "end": adjusted_end, "js_start":js_start, "js_end":js_end})
   return HttpResponse("Page not currently available")
 
-def demo(request):
-  extension = UserExtension.objects.get(username=request.user.username)
-  return render(request, "frontend/competition.html", {"usern": extension})

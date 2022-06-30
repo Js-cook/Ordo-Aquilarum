@@ -50,5 +50,8 @@ class Competition(models.Model):
   time_start = models.TimeField()
   time_end = models.TimeField()
 
+  class Meta:
+    ordering = ["-time_start"]
+
   def __str__(self):
     return(f"{self.date}")

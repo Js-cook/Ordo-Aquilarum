@@ -221,4 +221,10 @@ def add_comp_multiplier(request, username, amount):
   extension.comp_multiplier = amount
   extension.save()
   return Response("Multiplier updated")
-  
+
+@api_view(["GET"])
+def reset_comp_points(request, username):
+  extension = UserExtension.objects.get(username=username)
+  extension.comp_points = 0
+  extension.save()
+  return Response("Points reset")

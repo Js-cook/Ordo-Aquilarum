@@ -7,6 +7,12 @@ let insurance = document.getElementById("insurance").innerHTML
 const endTime = document.getElementById("time-end").innerHTML
 const curTime = document.getElementById("time-now").innerHTML
 
+function startComp(){
+  let secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/reset-comp-points/${loggedUser}/`
+  fetch(secondUrl)
+  retrieveQuestion()
+}
+
 function updateItems(){
   let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-stats/${loggedUser}/`
   fetch(url)
@@ -168,16 +174,22 @@ function enableRewards(){
       thirdPrize.className = ""
     }
   })
+  // let secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/reset-comp-points/${loggedUser}/`
+  // fetch(secondUrl)
 }
 
 function addPoints(amount, btn){
   const fbtn = document.getElementById(btn)
+  fbtn.innerHTML = "Received!"
   fbtn.disabled = true
   let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-points/${loggedUser}/${amount}/`
   fetch(url)
 }
 
-function addTitle(){
+function addTitle(btn){
+  const fbtn = document.getElementById(btn)
+  fbtn.innerHTML = "Title Applied!"
+  fbtn.disabled = true
   let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-role/${loggedUser}/Champion/`
   fetch(url)
 }
