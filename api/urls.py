@@ -27,5 +27,6 @@ urlpatterns = [
     path("add-comp-insurance/<str:username>/<int:amount>/", views.add_comp_insurance, name="add-comp-insurance"),
     path("add-comp-multiplier/<str:username>/<int:amount>/", views.add_comp_multiplier, name="add-comp-multiplier"),
     path("reset-comp-points/<str:username>/", views.reset_comp_points, name="reset_comp_points"),
-    path("new-comp/", views.new_comp, name="new-comp")
+    path("new-comp/", views.new_comp, name="new-comp"),
+    path("reset-comp-buffs/<str:username>/", views.reset_comp_buffs, name="reset-comp-buffs")
 ]

@@ -6,8 +6,12 @@ let mult = document.getElementById("mult").innerHTML
 let insurance = document.getElementById("insurance").innerHTML
 const endTime = document.getElementById("time-end").innerHTML
 const curTime = document.getElementById("time-now").innerHTML
+const multBtn = document.getElementById("mult-btn")
+const insurBtn = document.getElementById("insur-btn")
 
 function startComp(){
+  let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/reset-comp-buffs/${loggedUser}/`
+  fetch(url)
   let secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/reset-comp-points/${loggedUser}/`
   fetch(secondUrl)
   retrieveQuestion()
@@ -20,18 +24,66 @@ function updateItems(){
   .then(function(data){
     mult = data.comp_multiplier
     insurance = data.comp_insurance
-    console.log(mult)
+    if (mult == 1){
+      multBtn.innerHTML = "II - 100"
+      multBtn.onclick = purchase("multiplier", 100, 2)
+    }
+    else if (mult == 2){
+      multBtn.innerHTML = "III - 500"
+      multBtn.onclick = purchase("multiplier", 500, 4)
+    }
+    else if (mult == 4) {
+      multBtn.innerHTML = "IV - 1000"
+      multBtn.onclick = purchase("multiplier", 1000, 10)
+    }
+    else {
+      multBtn.disabled = true
+      multBtn.innerHTML = "MAX"
+    }
+
+    if (insurance == 1){
+      insurBtn.innerHTML = "II - 100"
+      insurBtn.onclick = purchase("insurance", 100, 2)
+    }
+    else if (insurance == 2){
+      insurBtn.innerHTML = "III - 500"
+      insurBtn.onclick = purchase("insurance", 500, 4)
+    }
+    else if (insurance == 4) {
+      insurBtn.innerHTML = "IV - 1000"
+      insurBtn.onclick = purchase("insurance", 1000, 10)
+    }
+    else {
+      insurBtn.disabled = true
+      insurBtn.innerHTML = "MAX"
+    }
   })
 }
 
-function addInsurance(amount){
-  let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-comp-insurance/${loggedUser}/${amount}/`
+function purchase(type, cost, amount){
+  let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-stats/${loggedUser}/`
   fetch(url)
-}
-
-function addMultiplier(amount){
-  let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-comp-multiplier/${loggedUser}/${amount}/`
-  fetch(url)
+  .then((resp) => resp.json())
+  .then(function(data){
+    if (type == "multiplier"){
+      if (data.comp_points >= cost){
+        let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-comp-multiplier/${loggedUser}/${amount}/`
+        fetch(url)
+        let secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-comp-points/${loggedUser}/${cost}/`
+        fetch(secondUrl)
+        updateItems()
+      }
+    }
+    else {
+      if (data.comp_points >= cost){
+        let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/add-comp-insurance/${loggedUser}/${amount}/`
+        fetch(url)
+        let secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-comp-points/${loggedUser}/${cost}/`
+        fetch(secondUrl)
+        updateItems()
+    }
+    }
+  })  
 }
 
 function updateLeaderboard(){
@@ -194,9 +246,6 @@ function addTitle(btn){
   fetch(url)
 }
 
-// const targetUser = function(){
-//   console.log(this.id)
-// }
 function targetUser(user){
   console.log(user.id)
   let target = user.id

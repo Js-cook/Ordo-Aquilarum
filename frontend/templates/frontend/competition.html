@@ -83,8 +83,10 @@
 <p class="d-none" id="time-end">{{js_end}}</p>
 <nav class="navbar bg-light">
   <div class="container-fluid">
-    <p class="navbar-brand">{{start}}</p>
-    <p class="navbar-brand float-end">{{end}}</p>
+<!--     <p class="navbar-brand">{{start}}</p> -->
+    <button class="btn btn-success float-start" id="mult-btn">I</button>
+    <button class="btn btn-danger float-start" id="insur-btn">I</button>
+    <p class="navbar-brand float-end">End: {{end}}</p>
   </div>
 </nav>
 <p class="d-none" id="logged-user">{{request.user.username}}</p>

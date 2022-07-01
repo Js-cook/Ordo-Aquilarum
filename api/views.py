@@ -244,3 +244,11 @@ def new_comp(request):
   if serializer.is_valid():
     serializer.save()
   return Response(serializer.data)
+
+@api_view(["GET"])
+def reset_comp_buffs(request, username):
+  extension = UserExtension.objects.get(username=username)
+  extension.comp_multiplier = 1
+  extension.comp_insurance = 1
+  extension.save()
+  return Response("Buffs reset")
