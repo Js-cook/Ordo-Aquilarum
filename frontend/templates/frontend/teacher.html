@@ -51,12 +51,16 @@
   <p>Use the form below to start a new session. The game will be open for all users and begins as soon as this form is submitted. <b>Please note, only one game can be active at one time.</b></p>
 </div>
 <div class="container" id="form-rap">
+  {% if not comps %}
   <form>
     <label for="time-end">Time end</label>
     <br>
     <input name="time-end" type="time" id="time-selection">
-    <input type="submit" value="Start Game" class="btn btn-primary">
+    <input type="submit" value="Start Game" class="btn btn-primary" id="submit-btn">
   </form>
+  {% else %}
+  <p>A competition is already in progress. Please wait for the active competition to end before beginning a new competition.</p>
+  {% endif %}
 </div>
 <script>
   var result = document.getElementById("result")
@@ -157,6 +161,9 @@
         "time_end": entry
       })
     })
+    // window.location.href = window.location.href
+    document.getElementById("submit-btn").disabled = true
+    document.getElementById("submit-btn").value = "Game Active!"
   })
 </script>
 {% endblock %}

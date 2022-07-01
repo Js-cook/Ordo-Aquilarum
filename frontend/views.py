@@ -50,8 +50,18 @@ def leaderboard(request):
 @login_required
 def teacher(request):
   user = UserExtension.objects.get(username=request.user.username)
+  any_comps = False
+  # user = request.user
+  comps = list(Competition.objects.filter(date=datetime.date.today()))
+  if comps:
+    set_dt = f"{comps[0].date} {comps[0].time_end}"
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    str1 = datetime.datetime.fromisoformat(set_dt)
+    str2 = datetime.datetime.fromisoformat(current_time)
+    if str2 < str1:
+      any_comps = True
   if user.is_teacher:
-    return render(request, "frontend/teacher.html")
+    return render(request, "frontend/teacher.html", {"comps": any_comps})
   else:
     return redirect("index")
 

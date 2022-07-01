@@ -50,7 +50,7 @@ function updateLeaderboard(){
           <th scope="row">${i+1}</th>
           <td>${data[i].username}</td>
           <td>${data[i].comp_points}</td>
-          <td><button class="btn btn-primary">X</button></td>
+          <td><button onclick="targetUser(${data[i].username})" class="btn btn-primary" id="${data[i].username}">X</button></td>
         </tr>
         `
       }
@@ -192,6 +192,26 @@ function addTitle(btn){
   fbtn.disabled = true
   let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-role/${loggedUser}/Champion/`
   fetch(url)
+}
+
+// const targetUser = function(){
+//   console.log(this.id)
+// }
+function targetUser(user){
+  console.log(user.id)
+  let target = user.id
+  let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-stats/${loggedUser}/`
+  fetch(url)
+  .then((resp) => resp.json())
+  .then(function(data){
+    if (data.comp_points >= 150){
+      let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-comp-points/${target}/${100}/`
+      fetch(url)
+      let secondUrl = `https://ordo-aquilarum.p3rplexed.repl.co/api/subtract-comp-points/${loggedUser}/${150}/`
+      fetch(secondUrl)
+    }
+    updateLeaderboard()
+  })
 }
 
 // updateLeaderboard()
