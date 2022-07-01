@@ -156,6 +156,7 @@ function retrieveQuestion(){
   }
   let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-question/all/`
   const questionPlaceholder = document.getElementById("question")
+  questionPlaceholder.innerHTML = `<div class="spinner-border text-secondary" role="status"></div>`
   const caseAnswers = document.getElementById("case-answers")
   const numAnswers = document.getElementById("number-answers")
   correctBanner.className="position-absolute bottom-0 start-50 translate-middle-x alert alert-success d-none"
