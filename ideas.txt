@@ -1,0 +1,10 @@
+Team mode
+- Players select team
+- One team answers as many questions as possible in a time frame
+- After that, the other team does the same
+- End game or use a round system
+- Team rewards/leaderboards
+- Possibly add modifiers?
+
+Performance Issues
+- Fetch 10 questions at a time

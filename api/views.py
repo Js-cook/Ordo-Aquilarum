@@ -81,13 +81,17 @@ def subtract_points(request, username, amount):
 
 @api_view(["GET"])
 def retrieve(request, declension):
-  possibilities = []
+  # possibilities = []
   duplicates = []
-  for question in Question.objects.all():
-    if declension == "all":
-      possibilities.append(question)
-    elif declension in question.declension:
-      possibilities.append(question)
+  # for question in Question.objects.all():
+  #   if declension == "all":
+  #     possibilities.append(question)
+  #   elif declension in question.declension:
+  #     possibilities.append(question)
+  if declension == "all":
+    possibilities = list(Question.objects.all())
+  else:
+    possibilities = list(Question.objects.filter(declension=f" {declension} "))
   selected_question = random.choice(possibilities)
   duplicates.append(selected_question)
   for question in Question.objects.all():
