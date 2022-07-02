@@ -256,3 +256,10 @@ def reset_comp_buffs(request, username):
   extension.comp_insurance = 1
   extension.save()
   return Response("Buffs reset")
+
+@api_view(["GET"])
+def change_team(request, username, team):
+  extension = UserExtension.objects.get(username=username)
+  extension.team = team
+  extension.save()
+  return Response("Team updated")
