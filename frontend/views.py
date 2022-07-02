@@ -95,6 +95,7 @@ def register(request):
   context = {"form": form}
   return render(request, "registration/registration.html", context)
 
+@login_required
 def certamen(request):
   exists = list(Competition.objects.filter(date=datetime.date.today()))
   if len(exists) > 0:
@@ -111,3 +112,7 @@ def certamen(request):
         return render(request, "frontend/competition.html", {"start": adjusted_start, "end": adjusted_end, "js_start":js_start, "js_end":js_end})
   return HttpResponse("Page not currently available")
 
+@login_required
+def test(request):
+  extension = UserExtension.objects.get(username=request.user.username)
+  return render(request, "frontend/rumble.html", {"usern": extension})

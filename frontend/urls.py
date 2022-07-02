@@ -11,5 +11,6 @@ urlpatterns = [
     path("shop", views.shop, name="shop"),
     path("register", views.register, name="register"),
     # Delete this after 
-    path("certamen", views.certamen, name="certamen")
+    path("certamen", views.certamen, name="certamen"),
+    path("certamen/rumble/", views.test, name="test")
 ]
