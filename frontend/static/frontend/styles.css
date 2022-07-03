@@ -25,11 +25,13 @@
 .btn-blue, .btn-blue:active {
   background-color: #0d6efd !important;
   border: solid #0d6efd !important;
+  color: white !important;
 }
 
 .btn-blue:hover {
   background-color: #0357c4ff !important;
   border: solid #0357c4ff !important;
+  color: white !important;
   
 }
 
