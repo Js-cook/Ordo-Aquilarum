@@ -263,3 +263,13 @@ def change_team(request, username, team):
   extension.team = team
   extension.save()
   return Response("Team updated")
+
+@api_view(["GET"])
+def update_competing(request, username, state):
+  extension = UserExtension.objects.get(username=username)
+  if state == "true":
+    extension.is_competing = True
+  else:
+    extension.is_competing = False
+  extension.save()
+  return Response("Status updated")

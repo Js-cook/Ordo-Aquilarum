@@ -29,6 +29,7 @@ class UserExtension(models.Model):
   comp_multiplier = models.IntegerField(default=1)
   comp_insurance = models.IntegerField(default=1)
   team = models.CharField(max_length=8, default="None")
+  is_competing = models.BooleanField(default=False)
 
   def __str__(self):
     return(self.username)

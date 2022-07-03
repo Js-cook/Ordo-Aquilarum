@@ -29,5 +29,6 @@ urlpatterns = [
     path("reset-comp-points/<str:username>/", views.reset_comp_points, name="reset_comp_points"),
     path("new-comp/", views.new_comp, name="new-comp"),
     path("reset-comp-buffs/<str:username>/", views.reset_comp_buffs, name="reset-comp-buffs"),
-    path("change-team/<str:username>/<str:team>/", views.change_team, name="change-team")
+    path("change-team/<str:username>/<str:team>/", views.change_team, name="change-team"),
+    path("update-competing/<str:username>/<str:state>/", views.update_competing, name="update-competing")
 ]
