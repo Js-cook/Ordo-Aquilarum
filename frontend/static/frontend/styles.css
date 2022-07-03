@@ -22,6 +22,17 @@
   border: solid #8716b8 !important;
 }
 
+.btn-blue, .btn-blue:active {
+  background-color: #0d6efd !important;
+  border: solid #0d6efd !important;
+}
+
+.btn-blue:hover {
+  background-color: #0357c4ff !important;
+  border: solid #0357c4ff !important;
+  
+}
+
 #sidebar {
   width: 15%;
   height: 100%;

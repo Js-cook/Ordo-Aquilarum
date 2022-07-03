@@ -1,9 +1,9 @@
 window.onload = function(){
-  if (window.sessionStorage("firstExecute") === null){
+  if (sessionStorage.getItem("firstExecute") === null){
     console.log("yes")
     document.getElementById("start-modal").click()
 
-    window.sessionStorage("firstExecute", false)
+    sessionStorage.setItem("firstExecute", false)
   }
   else {
     console.log("no")

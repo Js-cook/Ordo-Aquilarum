@@ -11,14 +11,35 @@
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Team Selection</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <div class="container">
+          <p>Welcome! Before the game can begin, you must first select a team to compete for. <b>NOTE: Once you select a team, your decision is final!</b></p>
+        </div>
+        <div class="container d-flex justify-content-center">
+          <div class="container d-flex justify-content-center">
+            <h3 class="text-danger">Red Team</h3>
+            <br>
+            <button class="btn btn-danger">Join</button>
+          </div>
+          <div class="container d-flex justify-content-center">
+            <h3 class="text-primary">Blue Team</h3>
+            <br>
+            <button class="btn btn-blue">Join</button>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center text-center mt-5">
+          {% if usern.is_teacher %}
+          <button class="btn btn-primary">Start</button>
+          {% else %}
+          <h4>Please wait for the match to begin...</h4>
+          {% endif %}
+        </div>
       </div>
       <div class="modal-footer">
         <a href="{% url 'index' %}" class="btn btn-primary">Home</a>

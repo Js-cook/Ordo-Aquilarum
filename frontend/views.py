@@ -112,7 +112,7 @@ def certamen(request):
         return render(request, "frontend/competition.html", {"start": adjusted_start, "end": adjusted_end, "js_start":js_start, "js_end":js_end})
   return HttpResponse("Page not currently available")
 
-@login_required
+# @login_required
 def test(request):
   extension = UserExtension.objects.get(username=request.user.username)
   return render(request, "frontend/rumble.html", {"usern": extension})
