@@ -9,6 +9,18 @@ const curTime = document.getElementById("time-now").innerHTML
 const multBtn = document.getElementById("mult-btn")
 const insurBtn = document.getElementById("insur-btn")
 
+const endTimeUnix = new Date(endTime).getTime()
+
+function checkTime(){
+  let currentTime = new Date().getTime()
+  if (currentTime >= endTimeUnix){
+    document.getElementById("end-modal").click()
+    enableRewards()
+  }
+}
+
+setInterval(checkTime, 1000)
+
 function startComp(){
   let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/reset-comp-buffs/${loggedUser}/`
   fetch(url)
@@ -148,12 +160,12 @@ function updateLeaderboard(){
 function retrieveQuestion(){
   updateLeaderboard()
   updateItems()
-  let endDateTime = new Date(endTime)
-  let currentDateTime = new Date()
-  if (currentDateTime >= endDateTime){
-    document.getElementById("end-modal").click()
-    enableRewards()
-  }
+  // let endDateTime = new Date(endTime)
+  // let currentDateTime = new Date()
+  // if (currentDateTime >= endDateTime){
+  //   document.getElementById("end-modal").click()
+  //   enableRewards()
+  // }
   let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/retrieve-question/all/`
   const questionPlaceholder = document.getElementById("question")
   questionPlaceholder.innerHTML = `<div class="spinner-border text-secondary" role="status"></div>`
@@ -184,12 +196,12 @@ formWrapper.addEventListener("submit", function(e){
 })
 
 function checkAnswer(caseAns, numAns){
-  let endDateTime = new Date(endTime)
-  let currentDateTime = new Date()
-  if (currentDateTime >= endDateTime){
-    document.getElementById("end-modal").click()
-    enableRewards()
-  }
+  // let endDateTime = new Date(endTime)
+  // let currentDateTime = new Date()
+  // if (currentDateTime >= endDateTime){
+  //   document.getElementById("end-modal").click()
+  //   enableRewards()
+  // }
   let ansCorrect = false
   const caseContainer = document.getElementById("case-answers").innerHTML
   const possibleCase = caseContainer.split(" ")
