@@ -39,6 +39,7 @@ function joinTeam(team){
     blueTeamBtn.disabled = true
     redTeamBtn.disabled = true
     let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-team/${loggedUser}/blue/`
+    fetch(url)
   }
   else {
     loggedTeam.innerHTML = "red"
@@ -50,13 +51,14 @@ function joinTeam(team){
     blueTeamBtn.disabled = true
     redTeamBtn.disabled = true
     let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/change-team/${loggedUser}/red/`
+    fetch(url)
   }
-  fetch(url)
 }
 
 function startMatch(){
   startTime = new Date().getTime()
-  switchTime = startTime + 10000
+  // switchTime = startTime + 300000
+  switchTime = startTime + 5000
   endTime = switchTime + 300000
   console.log(`Start: ${startTime}`)
   if (loggedTeam.innerHTML == "blue"){
@@ -74,7 +76,6 @@ function startMatch(){
 
 function getTime(){
   let ct = new Date().getTime()
-  console.log(`Switch: ${ct}`)
   if (ct >= switchTime){
     console.log("switch")
     let switchTime = 99999999999999999999
@@ -90,6 +91,8 @@ function getTime(){
 function switchSides(){
   if (loggedTeam.innerHTML == "blue"){
     document.getElementById("start-modal").click()
+    modalBody.className = "modal-body d-none"
+    altBody.className = "modal-body"
   }
   else {
     closeBtn.click()

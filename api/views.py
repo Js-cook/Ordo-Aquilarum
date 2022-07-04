@@ -280,3 +280,11 @@ def end_rumble(request, id):
   obj.finished = True
   obj.save()
   return Response("Rumble ended")
+
+@api_view(["GET"])
+def team_score(request, name):
+  total = 0
+  users = list(UserExtension.objects.filter(team=name))
+  for user in users:
+    total += user.comp_points
+  return Response(total)
