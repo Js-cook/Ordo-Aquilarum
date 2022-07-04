@@ -10,8 +10,12 @@ const incorrectBanner = document.getElementById("incorrect-banner")
 const correctBanner = document.getElementById("correct-banner")
 const submitBtn = document.getElementById("submit-btn")
 let startTime = null
+let intervall = null
+let switchTime = null
+let endTime = null
 
 window.onload = function(){
+  console.log("execute")
   if (sessionStorage.getItem("firstExecute") === null){
     console.log("yes")
     document.getElementById("start-modal").click()
@@ -52,6 +56,9 @@ function joinTeam(team){
 
 function startMatch(){
   startTime = new Date().getTime()
+  switchTime = startTime + 10000
+  endTime = switchTime + 300000
+  console.log(`Start: ${startTime}`)
   if (loggedTeam.innerHTML == "blue"){
     closeBtn.click()
     retrieveQuestion()
@@ -60,19 +67,22 @@ function startMatch(){
     modalBody.className = "modal-body d-none"
     altBody.className = "modal-body"
   }
+  intervall = setInterval(getTime, 1000)
 }
 
-let switchTime = startTime + 300000
-let endTime = switchTime + 300000
+// let switchTime = startTime + 300000
 
 function getTime(){
   let ct = new Date().getTime()
+  console.log(`Switch: ${ct}`)
   if (ct >= switchTime){
+    console.log("switch")
     let switchTime = 99999999999999999999
+    clearInterval(intervall)
     switchSides()
   }
   if (ct >= endTime){
-    let endTime = 99999999999999999999
+    // let endTime = 99999999999999999999
     // Call function to end match
   }
 }
