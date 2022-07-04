@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from api.models import UserExtension, Competition
+from api.models import UserExtension, Competition, Rumble
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
 import datetime
@@ -113,6 +113,14 @@ def certamen(request):
   return HttpResponse("Page not currently available")
 
 # @login_required
+# def test(request):
+#   extension = UserExtension.objects.get(username=request.user.username)
+#   exists = list(Rumble.objects.filter(date=datetime.date.today()))
+#   if len(exists) > 0 and exists[0].finished != True:
+#     return render(request, "frontend/rumble.html", {"usern": extension})
+#   else:
+#     return HttpResponse("Page not currently available")
+
 def test(request):
   extension = UserExtension.objects.get(username=request.user.username)
   return render(request, "frontend/rumble.html", {"usern": extension})

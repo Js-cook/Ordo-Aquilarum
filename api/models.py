@@ -57,3 +57,14 @@ class Competition(models.Model):
 
   def __str__(self):
     return(f"{self.date}")
+
+class Rumble(models.Model):
+  date = models.DateField(auto_now=True)
+  time_start = models.TimeField(auto_now=True)
+  finished = models.BooleanField(default=False)
+
+  class Meta:
+    ordering = ["-time_start"]
+
+  def __str__(self):
+    return(f"{self.date}")

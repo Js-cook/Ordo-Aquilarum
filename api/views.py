@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Question, UserExtension, Session
+from .models import Question, UserExtension, Session, Rumble
 from django.contrib.auth.models import Group, User
 
 from .serializers import UserExtensionSerializer, QuestionSerializer, GroupSerializer, SessionSerializer, CompetitionSerializer
@@ -273,3 +273,10 @@ def update_competing(request, username, state):
     extension.is_competing = False
   extension.save()
   return Response("Status updated")
+
+@api_view(["GET"])
+def end_rumble(request, id):
+  obj = Rumble.objects.get(id=id)
+  obj.finished = True
+  obj.save()
+  return Response("Rumble ended")

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import UserExtension, Question, Session, Competition
+from .models import UserExtension, Question, Session, Competition, Rumble
 from django.contrib.auth.models import Group
 
 class UserExtensionSerializer(serializers.ModelSerializer):
@@ -25,4 +25,9 @@ class SessionSerializer(serializers.ModelSerializer):
 class CompetitionSerializer(serializers.ModelSerializer):
   class Meta:
     model = Competition
+    fields = "__all__"
+
+class RumbleSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Rumble
     fields = "__all__"

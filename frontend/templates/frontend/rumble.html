@@ -5,6 +5,7 @@
 
 {% block content %}
 <p class="d-none" id="logged-user">{{request.user.username}}</p>
+<p class="d-none" id="logged-team"></p>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="start-modal">
   start modal
@@ -18,7 +19,7 @@
         <h5 class="modal-title" id="staticBackdropLabel">Team Selection</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="modal-body">
         <div class="container">
           <p>Welcome! Before the game can begin, you must first select a team to compete for. <b>NOTE: Once you select a team, your decision is final!</b></p>
         </div>
@@ -44,17 +45,82 @@
         </div>
         <div class="d-flex justify-content-center text-center mt-5">
           {% if usern.is_teacher %}
-          <button class="btn btn-primary">Start</button>
+          <button class="btn btn-primary" onclick="startMatch()">Start</button>
           {% else %}
           <h4>Please wait for the match to begin...</h4>
           {% endif %}
         </div>
       </div>
+      <div class="modal-body d-none" id="secondary-body">
+        <div class="container text-center">
+          <h2>Please wait...</h2>
+          <p>The blue team is currently answering, after their turn is complete, your team will do the same.</p>
+        </div>
+      </div>
       <div class="modal-footer">
+        <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close" id="close-btn"></button>
         <a href="{% url 'index' %}" class="btn btn-primary">Home</a>
       </div>
     </div>
   </div>
+</div>
+<div class="text-center mt-4" id="case-num">
+  <div class="border border-3 d-inline-block p-5 rounded">
+    <p class="d-none" id="selected-declension"></p>
+    <h1 id="question"></h1>
+  </div>
+</div>
+<div id="form-wrapper" class="">
+  <form id="form">
+    <div class="d-flex justify-content-center mt-4">
+      <div class="form-check form-check-inline">
+        <label for="nom">Nominative</label>
+        <input type="radio" id="nom" name="case" value="Nominative">
+      </div>
+      <div class="form-check form-check-inline">
+        <label for="gen">Genitive</label>
+        <input type="radio" id="gen" name="case" value="Genitive">
+      </div>
+      <div class="form-check form-check-inline">
+        <label for="dat">Dative</label>
+        <input type="radio" id="dat" name="case" value="Dative">
+      </div>
+      <div class="form-check form-check-inline">
+        <label for="acc">Accusative</label>
+        <input type="radio" id="acc" name="case" value="Accusative">
+      </div>
+      <div class="form-check form-check-inline">
+        <label for="abl">Ablative</label>
+        <input type="radio" id="abl" name="case" value="Ablative">
+      </div>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center"> 
+      <div class="form-check form-check-inline">
+        <label for="sg">Singular</label>
+        <input type="radio" id="sg" name="number" value="sg.">
+      </div>
+      <div class="form-check form-check-inline">
+        <label for="pl">Plural</label>
+        <input type="radio" id="pl" name="number" value="pl.">
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+      <input type="submit" value="Check" id="submit-btn" class="btn btn-primary">
+    </div>
+  </form>
+</div>
+<div class="position-absolute bottom-0 start-50 translate-middle-x alert alert-danger d-none" id="incorrect-banner">
+  Incorrect! Answers include:
+  <div id="case-answers"></div>
+  <div id="number-answers"></div>
+  <div id="adj-answer"></div>
+  <button class="btn btn-danger" onclick="retrieveQuestion()">Continue</button>
+</div>
+<div class="position-absolute bottom-0 start-50 translate-middle-x alert alert-success d-none" id="correct-banner">
+  Correct! Nicely done.
+  <button class="btn btn-success" onclick="retrieveQuestion()">Continue</button>
 </div>
 
 <script type="text/javascript" src="{% static 'frontend/rumble.js' %}"></script>
