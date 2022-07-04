@@ -59,7 +59,8 @@ function startMatch(){
   startTime = new Date().getTime()
   // switchTime = startTime + 300000
   switchTime = startTime + 5000
-  endTime = switchTime + 300000
+  // endTime = switchTime + 300000
+  endTime = switchTime + 5000
   console.log(`Start: ${startTime}`)
   if (loggedTeam.innerHTML == "blue"){
     closeBtn.click()
@@ -76,19 +77,23 @@ function startMatch(){
 
 function getTime(){
   let ct = new Date().getTime()
-  if (ct >= switchTime){
+  if (ct >= switchTime && ct < switchTime + 500){
     console.log("switch")
     let switchTime = 99999999999999999999
     clearInterval(intervall)
     switchSides()
   }
   if (ct >= endTime){
-    // let endTime = 99999999999999999999
+    let endTime = 99999999999999999999
+    clearInterval(intervall)
     // Call function to end match
+    alert("end")
   }
 }
 
 function switchSides(){
+  intervall = setInterval(getTime, 1000)
+  console.log("switchting sides")
   if (loggedTeam.innerHTML == "blue"){
     document.getElementById("start-modal").click()
     modalBody.className = "modal-body d-none"
@@ -96,6 +101,7 @@ function switchSides(){
   }
   else {
     closeBtn.click()
+    retrieveQuestion()
   }
 }
 
