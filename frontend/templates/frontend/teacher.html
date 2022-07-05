@@ -51,7 +51,7 @@
   <p>Use the form below to start a new session. The game will be open for all users and begins as soon as this form is submitted. <b>Please note, only one game can be active at one time.</b></p>
 </div>
 <div class="container" id="form-rap">
-  {% if not comps %}
+  {% if not comps and not rumbles %}
   <form>
     <label for="time-end">Time end</label>
     <br>
@@ -62,7 +62,17 @@
   <p>A competition is already in progress. Please wait for the active competition to end before beginning a new competition.</p>
   {% endif %}
 </div>
+{% if not rumbles and not comps%}
+<div class="container">
+  <h3>Rumble</h3>
+  <button class="btn btn-primary mb-4" onclick="startRumble()" id="rumble-btn">Begin Rumble</button>
+</div>
+{% else %}
+<p>A competition is already in progress. Please wait for the active competition to end before beginning a new competition.</p>
+{% endif %}
 <script>
+  let btn = document.getElementById("rumble-btn")
+  
   var result = document.getElementById("result")
   var wrap = document.getElementById("form-wrap")
   wrap.addEventListener("submit", function(e){
@@ -86,6 +96,15 @@
     else {
       wrap.className = "container d-none mt-4"
     }
+  }
+
+  function startRumble(){
+    let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/create-rumble/`
+    fetch(url)
+    btn.disabled = true
+    btn.innerHTML = "Rumble Active!"
+    document.getElementById("submit-btn").disabled = true
+    document.getElementById("submit-btn").value = "Cannot begin while Rumble is active"
   }
 
   var classList = document.getElementById("class-list")

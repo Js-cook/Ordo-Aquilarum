@@ -288,3 +288,9 @@ def team_score(request, name):
   for user in users:
     total += user.comp_points
   return Response(total)
+
+@api_view(["GET"])
+def create_rumble(request):
+  r = Rumble()
+  r.save()
+  return Response("Rumble created")

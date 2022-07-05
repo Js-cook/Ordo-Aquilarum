@@ -56,8 +56,10 @@ def leaderboard(request):
 def teacher(request):
   user = UserExtension.objects.get(username=request.user.username)
   any_comps = False
+  any_rumbles = False
   # user = request.user
   comps = list(Competition.objects.filter(date=datetime.date.today()))
+  rumbles = list(Rumble.objects.filter(date=datetime.date.today(), finished=False))
   if comps:
     set_dt = f"{comps[0].date} {comps[0].time_end}"
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -65,8 +67,10 @@ def teacher(request):
     str2 = datetime.datetime.fromisoformat(current_time)
     if str2 < str1:
       any_comps = True
+  if rumbles:
+    any_rumbles = True
   if user.is_teacher:
-    return render(request, "frontend/teacher.html", {"comps": any_comps})
+    return render(request, "frontend/teacher.html", {"comps": any_comps, "rumbles": any_rumbles})
   else:
     return redirect("index")
 

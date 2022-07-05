@@ -117,6 +117,7 @@ function openResults(){
   finBody.className = "modal-body"
   let turl = `https://ordo-aquilarum.p3rplexed.repl.co/api/end-rumble/${compId}/`
   fetch(turl)
+  sessionStorage.removeItem("firstExecute")
 }
 
 function switchSides(){
