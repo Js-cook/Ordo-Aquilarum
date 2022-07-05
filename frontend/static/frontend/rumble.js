@@ -9,6 +9,10 @@ const altBody = document.getElementById("secondary-body")
 const incorrectBanner = document.getElementById("incorrect-banner")
 const correctBanner = document.getElementById("correct-banner")
 const submitBtn = document.getElementById("submit-btn")
+const blueResults = document.getElementById("blue-team-results")
+const redResults = document.getElementById("red-team-results")
+const finBody = document.getElementById("final-body")
+const res = document.getElementById("res")
 let startTime = null
 let intervall = null
 let switchTime = null
@@ -86,9 +90,27 @@ function getTime(){
   if (ct >= endTime){
     let endTime = 99999999999999999999
     clearInterval(intervall)
+    console.log("end")
     // Call function to end match
-    alert("end")
+    openResults()
   }
+}
+
+function openResults(){
+  let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/compile-team-score/blue/`
+  fetch(url)
+  .then((resp) => resp.json())
+  .then(function(data){
+    blueResults.innerHTML = data
+  })
+  let surl = `https://ordo-aquilarum.p3rplexed.repl.co/api/compile-team-score/red/`
+  fetch(surl)
+  .then((resp) => resp.json())
+  .then(function(data){
+    redResults.innerHTML = data
+  })
+  altBody.className = "modal-body d-none"
+  finBody.className = "modal-body"
 }
 
 function switchSides(){
