@@ -6,6 +6,7 @@
 {% block content %}
 <p class="d-none" id="logged-user">{{request.user.username}}</p>
 <p class="d-none" id="logged-team"></p>
+<p class="d-none" id="comp-id">{{cid}}</p>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="start-modal">
   start modal
@@ -16,7 +17,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Team Selection</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Rumble</h5>
       </div>
       <div class="modal-body" id="modal-body">
         <div class="container">

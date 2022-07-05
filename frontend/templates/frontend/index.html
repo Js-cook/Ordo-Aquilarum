@@ -11,6 +11,13 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 {% endif %}
+{% if rumbles %}
+<div class="alert alert-warning alert-dismissible fade show rounded-3" role="alert">
+  <strong>Quid?!</strong> A competition has been initiated, glory awaits!
+  <a href="{% url 'test' %}" class="btn btn-warning ms-3">Join</a>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
 <div id="all-content" class="p-3">
   <div id="main-content" class="container">
     <h1>Salve {{user.username}}.</h1>

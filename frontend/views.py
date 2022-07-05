@@ -9,10 +9,13 @@ from datetime import timedelta
 from django.http import HttpResponse
 
 # Create your views here.
+
 def index(request):
   any_comps = False
+  any_rumbles = False
   user = request.user
   comps = list(Competition.objects.filter(date=datetime.date.today()))
+  rumbles = list(Rumble.objects.filter(date=datetime.date.today(), finished=False)) 
   if comps:
     set_dt = f"{comps[0].date} {comps[0].time_end}"
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -20,9 +23,11 @@ def index(request):
     str2 = datetime.datetime.fromisoformat(current_time)
     if str2 < str1:
       any_comps = True
+  if rumbles:
+    any_rumbles = True
   if user.is_authenticated:
     user_extension = UserExtension.objects.get(username=request.user.username)
-    return render(request, "frontend/index.html", {"usern": user_extension, "comps": any_comps})
+    return render(request, "frontend/index.html", {"usern": user_extension, "comps": any_comps, "rumbles": any_rumbles})
   else:
     return redirect("login")
 
@@ -112,15 +117,15 @@ def certamen(request):
         return render(request, "frontend/competition.html", {"start": adjusted_start, "end": adjusted_end, "js_start":js_start, "js_end":js_end})
   return HttpResponse("Page not currently available")
 
-# @login_required
-# def test(request):
-#   extension = UserExtension.objects.get(username=request.user.username)
-#   exists = list(Rumble.objects.filter(date=datetime.date.today()))
-#   if len(exists) > 0 and exists[0].finished != True:
-#     return render(request, "frontend/rumble.html", {"usern": extension})
-#   else:
-#     return HttpResponse("Page not currently available")
-
+@login_required
 def test(request):
   extension = UserExtension.objects.get(username=request.user.username)
-  return render(request, "frontend/rumble.html", {"usern": extension})
+  exists = list(Rumble.objects.filter(date=datetime.date.today()))
+  if len(exists) > 0 and exists[0].finished != True:
+    return render(request, "frontend/rumble.html", {"usern": extension, "cid": exists[0].id})
+  else:
+    return HttpResponse("Page not currently available")
+
+# def test(request):
+#   extension = UserExtension.objects.get(username=request.user.username)
+#   return render(request, "frontend/rumble.html", {"usern": extension})

@@ -13,6 +13,7 @@ const blueResults = document.getElementById("blue-team-results")
 const redResults = document.getElementById("red-team-results")
 const finBody = document.getElementById("final-body")
 const res = document.getElementById("res")
+const compId = document.getElementById("comp-id").innerHTML
 let startTime = null
 let intervall = null
 let switchTime = null
@@ -25,6 +26,9 @@ window.onload = function(){
     document.getElementById("start-modal").click()
     let url = `https://ordo-aquilarum.p3rplexed.repl.co/api/update-competing/${loggedUser}/true/`
     fetch(url)
+
+    let surl = `https://ordo-aquilarum.p3rplexed.repl.co/api/reset-comp-points/${loggedUser}/`
+    fetch(surl)
     sessionStorage.setItem("firstExecute", false)
   }
   else {
@@ -111,6 +115,8 @@ function openResults(){
   })
   altBody.className = "modal-body d-none"
   finBody.className = "modal-body"
+  let turl = `https://ordo-aquilarum.p3rplexed.repl.co/api/end-rumble/${compId}/`
+  fetch(turl)
 }
 
 function switchSides(){
