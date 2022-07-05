@@ -65,10 +65,8 @@ function joinTeam(team){
 
 function startMatch(){
   startTime = new Date().getTime()
-  // switchTime = startTime + 300000
-  switchTime = startTime + 5000
-  // endTime = switchTime + 300000
-  endTime = switchTime + 5000
+  switchTime = startTime + 300000
+  endTime = switchTime + 300000
   console.log(`Start: ${startTime}`)
   if (loggedTeam.innerHTML == "blue"){
     closeBtn.click()
