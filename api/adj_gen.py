@@ -76,6 +76,10 @@ def generate_adj(declension):
     if r_split[-1] in hashed:
       if r_item in items:
         items.remove(r_item)
+
+    if r_item['gender'] == selection['gender']:
+      if r_item in items:
+        items.remove(r_item)
   
   first_incor = random.choice(items)
   items.remove(first_incor)
