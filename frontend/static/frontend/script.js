@@ -74,7 +74,7 @@ function retrieveQuestion(){
         adj.className = "text-center mt-4"
         caseHeader.className = "text-center mt-4 d-none"
         formWrapper.className = "d-none"
-        adjFormWrapper.className = ""
+        adjFormWrapper.className = "d-flex justify-content-center me-4"
         var btn = Math.floor(Math.random() * 3)
         var resp_selec = data[0]
         qId = data[0].id
