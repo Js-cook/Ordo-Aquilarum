@@ -32,6 +32,9 @@ function retrieveQuestion(){
   if (declension) {
     if (qType == 0){
       var header = document.getElementById("question")
+      header.innerHTML = `<div class="spinner-border text-secondary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>`
       var case_container = document.getElementById("case-answers")
       var number_container = document.getElementById("number-answers")
       case_container.innerHTML = ""
@@ -57,6 +60,9 @@ function retrieveQuestion(){
     else if(qType == 1){
       console.log("selected")
       var header = document.getElementById("adj-question")
+      header.innerHTML = `<div class="spinner-border text-secondary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>`
       var btn1 = document.getElementById("option1")
       var btn2 = document.getElementById("option2")
       var btn3 = document.getElementById("option3")
