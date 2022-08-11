@@ -20,6 +20,13 @@ var pointsInsurance = document.getElementById("point-insur").innerHTML
 var qId = null
 
 function retrieveQuestion(){
+  if (correct + incorrect >= 50){
+    document.getElementById("fin-modal").click()
+    document.getElementById("correct-holder").innerHTML += correct
+    document.getElementById("incorrect-holder").innerHTML += incorrect
+    document.getElementById("percent-holder").innerHTML += `${Math.round((correct/(correct+incorrect)) * 100)}%`
+    collectStats()
+  }
   var qType = Math.floor(Math.random() * 2)
   correctHolder.innerHTML = correct
   incorrectHolder.innerHTML = incorrect
@@ -222,5 +229,5 @@ function collectStats(){
   })
   // "date": dateHolder.innerHTML,
   // Update when hosted
-  window.location.href = "https://ordo-aquilarum.p3rplexed.repl.co/"
+  // window.location.href = "https://ordo-aquilarum.p3rplexed.repl.co/"
 }

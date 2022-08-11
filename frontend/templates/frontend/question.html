@@ -4,7 +4,7 @@
 {% block title %}Question{% endblock %}
 
 {% block content %}
-<div class="float-end">
+<div class="float-end d-none">
   <button onclick="collectStats()" class="btn btn-outline-secondary">X</button>
 </div>
 <h4 id="user" class="d-none">{{user.username}}</h4>
@@ -88,6 +88,31 @@
 <div class="position-absolute bottom-0 start-50 translate-middle-x alert alert-success d-none" id="correct-banner">
   Correct! Nicely done.
   <button class="btn btn-success" onclick="retrieveQuestion()">Continue</button>
+</div>
+<button id="fin-modal" type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  fin
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Practice Complete</h5>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          <p>That's a wrap on this practice session! Below are a few stats regarding your performance in the session.</p>
+          <h3 id="correct-holder">Questions correct: </h3>
+          <h3 id="incorrect-holder">Questions incorrect: </h3>
+          <h3 id="percent-holder">Accuracy: </h3>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="{% url 'index' %}" class="btn btn-primary">Home</a>
+      </div>
+    </div>
+  </div>
 </div>
 <div id="stats-block" class="d-none">
   <p id="date"></p>

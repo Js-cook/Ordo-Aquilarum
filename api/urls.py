@@ -33,5 +33,6 @@ urlpatterns = [
     path("update-competing/<str:username>/<str:state>/", views.update_competing, name="update-competing"),
     path("end-rumble/<str:id>/", views.end_rumble, name="end-rumble"),
     path("compile-team-score/<str:name>/", views.team_score, name="team-score"),
-    path("create-rumble/", views.create_rumble, name="create-rumble")
+    path("create-rumble/", views.create_rumble, name="create-rumble"),
+    path("delete-class/<int:id>/", views.delete_class, name="delete-class")
 ]

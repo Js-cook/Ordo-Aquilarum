@@ -294,3 +294,9 @@ def create_rumble(request):
   r = Rumble()
   r.save()
   return Response("Rumble created")
+
+@api_view(["GET"])
+def delete_class(request, id):
+  group = Group.objects.get(id=id)
+  group.delete()
+  return Response("Class Removed")

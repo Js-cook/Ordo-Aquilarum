@@ -121,12 +121,18 @@
         // <li><a href="https://ordo-aquilarum.p3rplexed.repl.co/classes/${name}/">${name}</a></li>
         // `
         classList.innerHTML += `
-        <a class="list-group-item" href="https://ordo-aquilarum.p3rplexed.repl.co/classes/${name}/">${name}</a>
+        <div class="list-group-item"><a id="${data[i].id}" href="https://ordo-aquilarum.p3rplexed.repl.co/classes/${name}/">${name}</a><button class="btn btn-primary float-end" onclick="deleteClass(${data[i].id})">X</button></div>
         `
       }
     })
   }
   refreshClasses()
+
+  function deleteClass(id){
+    var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/delete-class/${id}/`
+    fetch(url)
+    refreshClasses()
+  }
 
   function populateTable(){
     var url = `https://ordo-aquilarum.p3rplexed.repl.co/api/get-top-ten/`
